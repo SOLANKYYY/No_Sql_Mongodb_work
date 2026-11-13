@@ -1,0 +1,60 @@
+name: experiment12
+services:
+  runner:
+    image: ${LAB_IMAGE:-experiment12-runner:local}
+    volumes:
+    - ./results:/results
+    - ./screenshots:/screenshots:ro
+    - ./.secrets:/secrets
+    - tls-material:/certs
+    environment:
+      RESULTS_DIR: /results
+      SECRETS_DIR: /secrets
+      CERTS_DIR: /certs
+    logging: &id001
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'
+  mongo:
+    image: mongo:7.0.16
+    env_file:
+    - .secrets/root.env
+    command:
+    - mongod
+    - --auth
+    - --bind_ip_all
+    - --tlsMode
+    - requireTLS
+    - --tlsCertificateKeyFile
+    - /certs/server.pem
+    - --tlsCAFile
+    - /certs/ca.crt
+    - --wiredTigerCacheSizeGB
+    - '0.25'
+    volumes:
+    - mongo-data:/data/db
+    - tls-material:/certs:ro
+    mem_limit: 900m
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --host
+      - mongo
+      - --tls
+      - --tlsCAFile
+      - /certs/ca.crt
+      - --tlsCertificateKeyFile
+      - /certs/client.pem
+      - --quiet
+      - --eval
+      - db.adminCommand({ping:1})
+      interval: 5s
+      timeout: 5s
+      retries: 45
+      start_period: 15s
+    logging: *id001
+volumes:
+  mongo-data: null
+  tls-material: null
