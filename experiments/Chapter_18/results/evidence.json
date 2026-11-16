@@ -1,0 +1,376 @@
+{
+  "experiment": 18,
+  "passed": true,
+  "at": "2026-11-13T18:01:03.411717+00:00",
+  "environment": {
+    "python": "3.11.18 (main, Nov  5 2026, 07:57:53) [GCC 14.2.0]",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+    "cpu_count": 24,
+    "packages": {
+      "pymongo": "4.10.1",
+      "cassandra-driver": "3.29.2",
+      "neo4j": "5.26.0"
+    }
+  },
+  "versions": {
+    "MongoDB": "7.0.48",
+    "Cassandra": "4.1.12",
+    "Neo4j": [
+      "5.26.33"
+    ]
+  },
+  "data": {
+    "mode": "user-supplied export",
+    "source_name": "Signal Desk / CIRCL and Botvrij public MISP feeds",
+    "collected_at": "2026-11-13T12:32:27.452143+00:00",
+    "origin_attestation": "Fetched original public MISP JSON. Attributes are feed claims, not independently confirmed incidents. No synthetic padding.",
+    "raw_export_sha256": "6f45e360306b9075c543f4159a23af20d5044315f37779dff4dda6f8aefef1cb",
+    "normalized_sha256": "3e9c3e05e2311b4132569549e9f2329c7af7da905061020fedae4ac98b72c225",
+    "available_unique": 15000,
+    "selected": 15000,
+    "duplicates_removed": 0,
+    "sources": 3,
+    "oldest": "2026-08-12T19:01:53.000+00:00",
+    "newest": "2026-10-29T12:57:15.000+00:00",
+    "selection": "Up to 15,000 most recent supplied records; partial feed coverage",
+    "assignment_requested": 100000,
+    "adaptation": "User-requested reduced workload; does not satisfy the original 100,000-record requirement",
+    "record_unit": "MISP indicator attribute",
+    "timestamp_basis": "attribute modification time, not observed attack time",
+    "target_basis": "reported observable, not a victim or attack destination"
+  },
+  "load_seconds": {
+    "MongoDB": 0.2644604790000358,
+    "Cassandra": 6.268809674999943,
+    "Neo4j": 2.8782646449999447
+  },
+  "queries": [
+    {
+      "backend": "MongoDB",
+      "query": "history",
+      "runs": 10,
+      "median_ms": 1.007751000031476,
+      "min_ms": 0.9654489999775251,
+      "max_ms": 2.5146719999611378,
+      "all_ms": [
+        1.389676000030704,
+        2.5146719999611378,
+        1.0098200000356883,
+        1.0105479999538147,
+        0.9785330000795511,
+        0.9988140000132262,
+        1.0056820000272637,
+        0.9980140000607207,
+        1.0413649999918562,
+        0.9654489999775251
+      ],
+      "result_count": 50
+    },
+    {
+      "backend": "Cassandra",
+      "query": "history",
+      "runs": 10,
+      "median_ms": 2.1940810000273814,
+      "min_ms": 1.818744999923183,
+      "max_ms": 2.4398380001002806,
+      "all_ms": [
+        2.4398380001002806,
+        2.2546650000094814,
+        2.240867999944385,
+        1.818744999923183,
+        2.154698000026656,
+        2.2003880000056597,
+        2.041956999960348,
+        2.289507999989837,
+        2.187774000049103,
+        1.9402780000064013
+      ],
+      "result_count": 50
+    },
+    {
+      "backend": "Neo4j",
+      "query": "history",
+      "runs": 10,
+      "median_ms": 31.243587500000558,
+      "min_ms": 23.74120000001767,
+      "max_ms": 49.88910100007615,
+      "all_ms": [
+        49.88910100007615,
+        39.9674559999994,
+        36.129909999999654,
+        33.63020500000857,
+        31.904231999988042,
+        30.582943000013074,
+        29.90982299991174,
+        28.779073999999127,
+        23.74120000001767,
+        25.882881000029556
+      ],
+      "result_count": 50
+    },
+    {
+      "backend": "MongoDB",
+      "query": "spread",
+      "runs": 10,
+      "median_ms": 0.7869405000064944,
+      "min_ms": 0.6038129999978992,
+      "max_ms": 1.2364240000124482,
+      "all_ms": [
+        1.0340090000227065,
+        1.2364240000124482,
+        0.8013130000108504,
+        0.6569430000809007,
+        0.8404769999970085,
+        0.7725680000021384,
+        0.6038129999978992,
+        0.8177460000524661,
+        0.6954850000511215,
+        0.7470190000731236
+      ],
+      "result_count": 1
+    },
+    {
+      "backend": "Cassandra",
+      "query": "spread",
+      "runs": 10,
+      "median_ms": 1.724914500016439,
+      "min_ms": 1.2992869999379764,
+      "max_ms": 2.3007490000281905,
+      "all_ms": [
+        2.1505830000023707,
+        2.3007490000281905,
+        2.0061129999930927,
+        1.4046840000219163,
+        1.7306409999946482,
+        1.6257380000297417,
+        1.2992869999379764,
+        1.7191880000382298,
+        1.9300669999893216,
+        1.6117469999699097
+      ],
+      "result_count": 1
+    },
+    {
+      "backend": "Neo4j",
+      "query": "spread",
+      "runs": 10,
+      "median_ms": 4.079901000011432,
+      "min_ms": 3.3541430000241235,
+      "max_ms": 8.137072999943484,
+      "all_ms": [
+        5.5461939999759124,
+        5.8049530000516825,
+        5.149017000007916,
+        4.083238000021083,
+        3.8525589999380827,
+        3.3541430000241235,
+        4.076564000001781,
+        3.490638000016588,
+        3.749022999954832,
+        8.137072999943484
+      ],
+      "result_count": 1
+    },
+    {
+      "backend": "MongoDB",
+      "query": "daily",
+      "runs": 10,
+      "median_ms": 9.162194499992893,
+      "min_ms": 8.69943999998668,
+      "max_ms": 10.743423000008079,
+      "all_ms": [
+        10.743423000008079,
+        9.042638999972041,
+        9.565416000100413,
+        9.159542000020338,
+        9.399099999995997,
+        9.286997999993218,
+        9.065783999972155,
+        8.69943999998668,
+        9.164846999965448,
+        8.79714600000625
+      ],
+      "result_count": 6
+    },
+    {
+      "backend": "Cassandra",
+      "query": "daily",
+      "runs": 10,
+      "median_ms": 53.673504500011404,
+      "min_ms": 49.30754299994078,
+      "max_ms": 82.49785999998949,
+      "all_ms": [
+        62.68908999993528,
+        74.1503650000368,
+        54.03467400003592,
+        53.31233499998689,
+        82.49785999998949,
+        67.31195099996512,
+        50.25327099997412,
+        49.60878899998988,
+        49.30754299994078,
+        50.04375400005756
+      ],
+      "result_count": 6
+    },
+    {
+      "backend": "Neo4j",
+      "query": "daily",
+      "runs": 10,
+      "median_ms": 14.165894000029766,
+      "min_ms": 12.633797000034974,
+      "max_ms": 23.504851000097915,
+      "all_ms": [
+        23.504851000097915,
+        17.423831000087375,
+        16.779863000010664,
+        15.166255000053752,
+        13.16553300000578,
+        13.00291899997319,
+        13.074342999971122,
+        13.028614000063499,
+        12.633797000034974,
+        16.02098599994406
+      ],
+      "result_count": 6
+    },
+    {
+      "backend": "MongoDB",
+      "query": "ingest_1000",
+      "runs": 10,
+      "median_ms": 19.934204499975294,
+      "events_per_second": 50165.03166711465,
+      "min_ms": 18.498272999977416,
+      "max_ms": 20.822645999942324,
+      "all_ms": [
+        19.200996999984454,
+        20.186830000056943,
+        19.868427000005795,
+        20.822645999942324,
+        20.393135000063012,
+        19.999981999944794,
+        20.707755999978872,
+        19.1606910000246,
+        18.498272999977416,
+        18.678452000017387
+      ]
+    },
+    {
+      "backend": "Cassandra",
+      "query": "ingest_1000",
+      "runs": 10,
+      "median_ms": 362.74467100002994,
+      "events_per_second": 2756.7600021336148,
+      "min_ms": 280.6153719999429,
+      "max_ms": 475.0698539999121,
+      "all_ms": [
+        364.0195190000668,
+        337.9646109999612,
+        342.0095779999883,
+        431.4757610000015,
+        475.0698539999121,
+        361.4698229999931,
+        379.2323989999886,
+        425.36846000007245,
+        280.6153719999429,
+        312.74147500005256
+      ]
+    },
+    {
+      "backend": "Neo4j",
+      "query": "ingest_1000",
+      "runs": 10,
+      "median_ms": 70.81836849999945,
+      "events_per_second": 14120.630299468248,
+      "min_ms": 55.689757999971334,
+      "max_ms": 102.74977899996429,
+      "all_ms": [
+        95.26636400005373,
+        74.9580709999691,
+        69.02396600003158,
+        102.74977899996429,
+        72.61277099996732,
+        64.24500999992233,
+        80.1677849999578,
+        59.20192699989002,
+        55.689757999971334,
+        65.04415799997787
+      ]
+    }
+  ],
+  "checks": {
+    "history": {
+      "matched_all_backends": true,
+      "result_sha256": "4f7e2737a339cc97efdfde341b072e2938b30ccf3998995749a25337d238f750"
+    },
+    "spread": {
+      "matched_all_backends": true,
+      "result_sha256": "60bc038fb78e3e2832ee7fd25459580e6086269e2606ed5390716e8a9ec40842"
+    },
+    "daily": {
+      "matched_all_backends": true,
+      "result_sha256": "f86ce41309194d192f7c74f08f8833b55529edbb3f3773b8964258ce388a8f71"
+    }
+  },
+  "write_checks": {
+    "MongoDB": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "Cassandra": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "Neo4j": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "graph": {
+    "algorithm": "NetworkX greedy modularity over source relationships extracted from live Neo4j; SUSPICIOUS relationships written back to Neo4j",
+    "edge_rule": "at least 2 shared targets",
+    "candidate_rule": "community size >=3 and density >=0.5",
+    "nodes": 0,
+    "edges": 0,
+    "skipped_high_degree_targets": 0,
+    "communities": [],
+    "interpretation": "High connectivity can mean syndicated benign alerts OR a real campaign. This is a review queue, not proof of false positives."
+  },
+  "methodology": {
+    "read_trials": 10,
+    "write_trials": 10,
+    "write_batch": 1000,
+    "backend_order": "rotated each repeat",
+    "warmup": "one correctness run before each read query",
+    "history": "50 most recent events for busiest source",
+    "spread": "distinct sources observing most frequent target",
+    "daily": "counts grouped by UTC day",
+    "write_costs": "MongoDB full_threats + bounded recent array; Cassandra four denormalized tables; Neo4j threat, source/target nodes and edges",
+    "durability": "single-node classroom defaults; MongoDB w=1, Cassandra LOCAL_ONE, Neo4j committed transaction; not equivalent replicated durability",
+    "scope": "same machine and dataset; timings include driver/network and materializing all returned results; not distributed scaling evidence"
+  }
+}

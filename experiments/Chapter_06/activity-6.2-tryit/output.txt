@@ -1,0 +1,66 @@
+
+============================================================
+  Lab 6.2 (Try It Yourself): Covered Queries and the FETCH Stage
+============================================================
+
+[OK] Connected to MongoDB at mongodb://localhost:27017
+[OK] Inserted 20000 documents.
+[OK] Created compound index idx_city_age on (city, age)
+
+Query filter : {city: 'Mumbai', age: {$gte: 30}}
+Index fields : city, age
+
+=== explain() for each variant ===
+  A. Not covered - full documents returned
+    plan            : FETCH -> IXSCAN
+    index used      : idx_city_age
+    docs examined   : 617
+    keys examined   : 617
+    docs returned   : 617
+    FETCH stage     : PRESENT
+    covered query   : NO
+
+  B. Not covered - projection includes _id (forgot _id: 0)
+    plan            : PROJECTION_SIMPLE -> FETCH -> IXSCAN
+    index used      : idx_city_age
+    docs examined   : 617
+    keys examined   : 617
+    docs returned   : 617
+    FETCH stage     : PRESENT
+    covered query   : NO
+
+  C. COVERED - only indexed fields, _id excluded
+    plan            : PROJECTION_COVERED -> IXSCAN
+    index used      : idx_city_age
+    docs examined   : 0
+    keys examined   : 617
+    docs returned   : 617
+    FETCH stage     : ELIMINATED
+    covered query   : YES
+
+=== Timing: not covered (A) vs covered (C), 300 runs each ===
+  A. not covered : 3.055 ms/query
+  C. covered     : 1.916 ms/query
+  Covered query speedup: 1.6x
+
+[3m                                    Covered query verification                                    [0m
++------------------------------------------------------------------------------------------------+
+|[1m [0m[1mVariant                                             [0m[1m [0m|[1m [0m[1mDocs examined[0m[1m [0m|[1m [0m[1mFETCH       [0m[1m [0m|[1m [0m[1mCovered [0m[1m [0m|
+|------------------------------------------------------+---------------+--------------+----------|
+| A. Not covered - full documents returned             |           617 | PRESENT      | NO       |
+|------------------------------------------------------+---------------+--------------+----------|
+| B. Not covered - projection includes _id (forgot     |           617 | PRESENT      | NO       |
+| _id: 0)                                              |               |              |          |
+|------------------------------------------------------+---------------+--------------+----------|
+| C. COVERED - only indexed fields, _id excluded       |             0 | ELIMINATED   | YES      |
++------------------------------------------------------------------------------------------------+
+
+[OK] Stored 4 records in nosql_labs.covered_query_results
+[OK] Exported 4 documents from 'covered_query_results' to covered_query_results.json
+[OK] Exported 20000 documents from 'covered_query_demo' to covered_query_demo.json
+[OK] Terminal output saved to output.txt
+
+============================================================
+  Lab 6.2 Try It Yourself Complete
+============================================================
+

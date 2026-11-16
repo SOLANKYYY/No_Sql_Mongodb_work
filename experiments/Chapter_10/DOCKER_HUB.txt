@@ -1,0 +1,9 @@
+EXERCISE 10 - PUBLISHED DOCKER IMAGE
+
+Repository URL: https://hub.docker.com/r/solankyyy/exercise10-transactions
+Tag: solankyyy/exercise10-transactions:exercise10
+Immutable image: solankyyy/exercise10-transactions@sha256:a7cb4c956e7fd866ecdbedd534699a3cdbace4d472b8ffa33fe273b72e0c5e2e
+
+Public source/evidence retrieval verified against the published digest.
+Pull for demonstration:
+docker pull solankyyy/exercise10-transactions@sha256:a7cb4c956e7fd866ecdbedd534699a3cdbace4d472b8ffa33fe273b72e0c5e2e

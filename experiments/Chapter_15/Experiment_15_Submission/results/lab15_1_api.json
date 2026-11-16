@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-11-12T17:18:00.283905+00:00",
+  "passed": true,
+  "checks": {
+    "unauthenticated_rejected": true,
+    "invalid_token_rejected": true,
+    "alice_created": true,
+    "bob_created": true,
+    "carol_created": true,
+    "body_tenant_spoof_rejected": true,
+    "own_task_read": true,
+    "same_tenant_other_owner_hidden": true,
+    "tenant_admin_reads_all_own_tenant": true,
+    "regular_list_only_own": true,
+    "cross_tenant_get_blocked": true,
+    "cross_tenant_patch_blocked": true,
+    "cross_tenant_delete_blocked": true,
+    "admin_updates_other_owner": true,
+    "regular_updates_own": true,
+    "owner_spoof_update_rejected": true,
+    "own_delete": true,
+    "atomic_rate_limit": true
+  },
+  "concurrent_rate_limit": {
+    "allowed_200": 20,
+    "limited_429": 10,
+    "other": 0
+  },
+  "request_limit": 20,
+  "window_seconds": 60,
+  "identity_source": "validated JWT plus server-side user record",
+  "rbac": "admin: all tasks within own tenant; user: own tasks only",
+  "api_url": "http://localhost:8015/docs"
+}

@@ -1,0 +1,25 @@
+{
+  "lab": "13.1",
+  "timestamp": "2026-11-11T15:03:22.065517+00:00",
+  "members": [
+    {
+      "name": "mongo1:27017",
+      "state": "PRIMARY",
+      "health": 1.0
+    },
+    {
+      "name": "mongo2:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    },
+    {
+      "name": "mongo3:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    }
+  ],
+  "writeConcern": "w=3",
+  "authenticated_read_write": true,
+  "unauthenticated_read_denied": true,
+  "passed": true
+}

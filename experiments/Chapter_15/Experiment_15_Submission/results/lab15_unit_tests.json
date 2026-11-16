@@ -1,0 +1,6 @@
+{
+  "timestamp": "2026-11-12T17:16:26.527515+00:00",
+  "passed": true,
+  "kind": "mocked drivers and deterministic circuit-breaker tests; not live database evidence",
+  "output": "test_admin_still_scoped_to_tenant (test_logic.ApiPolicyTests) ... ok\ntest_body_cannot_change_identity (test_logic.ApiPolicyTests) ... ok\ntest_password_hash_not_plaintext_and_verifies (test_logic.ApiPolicyTests) ... ok\ntest_regular_scope_has_tenant_and_owner (test_logic.ApiPolicyTests) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.282s\n\nOK\n"
+}

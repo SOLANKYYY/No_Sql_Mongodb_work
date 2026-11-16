@@ -1,0 +1,86 @@
+
+============================================================
+  Lab 6.1: Index Design for a Query Workload
+============================================================
+
+[OK] Connected to MongoDB at mongodb://localhost:27017
+Generating 50,000 products (may take a few seconds)...
+[OK] Inserted 50000 products.
+Sample document:
+  {'name': 'Compact Keyboard 4606', 'category': 'Home', 'price': 227.09, 'rating': 3.9, 'stock': 346, 'tags': ['school', 'compact']}
+
+=== EXPLAIN: Before creating any index ===
+  Q1 - Category + sort by price (20 cheapest Electronics)
+    BEFORE: plan=SORT -> COLLSCAN
+           index=None  docs_examined=50000  keys_examined=0  returned=20  time=144 ms
+  Q2 - Price range 100 - 150
+    BEFORE: plan=COLLSCAN
+           index=None  docs_examined=50000  keys_examined=0  returned=2534  time=108 ms
+  Q3 - Tag lookup: tags = 'gaming'
+    BEFORE: plan=COLLSCAN
+           index=None  docs_examined=50000  keys_examined=0  returned=6085  time=130 ms
+  Q4 - Text search on name: "wireless keyboard"
+  Q4: $text query cannot run without a text index (server error).
+  Q4: using an equivalent regex query as the no-index baseline.
+    BEFORE: plan=COLLSCAN
+           index=None  docs_examined=50000  keys_examined=0  returned=650  time=23 ms
+  Q5 - Category + rating >= 4.5, sorted by price desc
+    BEFORE: plan=SORT -> COLLSCAN
+           index=None  docs_examined=50000  keys_examined=0  returned=20  time=67 ms
+
+=== Creating Indexes ===
+  idx_category_price_rating  (ESR: category=Equality, price=Sort, rating=Range) -> Q1, Q5
+  idx_price                  (range scan on price)                              -> Q2
+  idx_tags                   (multikey index on the tags array)                 -> Q3
+  idx_name_text              (text index on name)                               -> Q4
+[OK] Created 4 indexes covering all 5 queries.
+
+=== EXPLAIN: After creating indexes ===
+  Q1 - Category + sort by price (20 cheapest Electronics)
+    AFTER : plan=LIMIT -> FETCH -> IXSCAN
+           index=idx_category_price_rating  docs_examined=20  keys_examined=20  returned=20  time=16 ms
+  Q2 - Price range 100 - 150
+    AFTER : plan=FETCH -> IXSCAN
+           index=idx_price  docs_examined=2534  keys_examined=2534  returned=2534  time=8 ms
+  Q3 - Tag lookup: tags = 'gaming'
+    AFTER : plan=FETCH -> IXSCAN
+           index=idx_tags  docs_examined=6085  keys_examined=6085  returned=6085  time=11 ms
+  Q4 - Text search on name: "wireless keyboard"
+    AFTER : plan=TEXT_MATCH -> FETCH -> OR -> IXSCAN -> IXSCAN
+           index=idx_name_text  docs_examined=10827  keys_examined=11477  returned=650  time=38 ms
+  Q5 - Category + rating >= 4.5, sorted by price desc
+    AFTER : plan=LIMIT -> FETCH -> IXSCAN
+           index=idx_category_price_rating  docs_examined=20  keys_examined=102  returned=20  time=1 ms
+
+[3m                                                Before vs After: totalDocsExamined                                                [0m
++--------------------------------------------------------------------------------------------------------------------------------+
+|[1m [0m[1mQuery   [0m[1m [0m|[1m [0m[1mBefore plan             [0m[1m [0m|[1m [0m[1mDocs before[0m[1m [0m|[1m [0m[1mAfter plan                      [0m[1m [0m|[1m [0m[1mDocs after[0m[1m [0m|[1m [0m[1mIndex used                [0m[1m [0m|
+|----------+--------------------------+-------------+----------------------------------+------------+----------------------------|
+| Q1       | SORT -> COLLSCAN         |       50000 | LIMIT -> FETCH -> IXSCAN         |         20 | idx_category_price_rating  |
+|----------+--------------------------+-------------+----------------------------------+------------+----------------------------|
+| Q2       | COLLSCAN                 |       50000 | FETCH -> IXSCAN                  |       2534 | idx_price                  |
+|----------+--------------------------+-------------+----------------------------------+------------+----------------------------|
+| Q3       | COLLSCAN                 |       50000 | FETCH -> IXSCAN                  |       6085 | idx_tags                   |
+|----------+--------------------------+-------------+----------------------------------+------------+----------------------------|
+| Q4       | COLLSCAN                 |       50000 | TEXT_MATCH -> FETCH -> OR ->     |      10827 | idx_name_text              |
+|          |                          |             | IXSCAN -> IXSCAN                 |            |                            |
+|----------+--------------------------+-------------+----------------------------------+------------+----------------------------|
+| Q5       | SORT -> COLLSCAN         |       50000 | LIMIT -> FETCH -> IXSCAN         |         20 | idx_category_price_rating  |
++--------------------------------------------------------------------------------------------------------------------------------+
+
+=== Index Summary ===
+  _id_                         keys={'_id': 1}
+  idx_category_price_rating    keys={'category': 1, 'price': 1, 'rating': 1}
+  idx_price                    keys={'price': 1}
+  idx_tags                     keys={'tags': 1}
+  idx_name_text                keys={'_fts': 'text', '_ftsx': 1}
+
+[OK] Stored 5 before/after comparisons in nosql_labs.index_design_results
+[OK] Exported 5 documents from 'index_design_results' to index_design_results.json
+[OK] Exported 50000 documents from 'products' to products.json
+[OK] Terminal output saved to output.txt
+
+============================================================
+  Lab 6.1 Complete
+============================================================
+

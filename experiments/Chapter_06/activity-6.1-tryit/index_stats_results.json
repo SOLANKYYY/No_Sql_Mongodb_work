@@ -1,0 +1,7 @@
+[
+{"_id": {"$oid": "6aba2d31d64840e0a6694cd8"}, "index_name": "idx_category_price_rating", "key_pattern": "{'category': 1, 'price': 1, 'rating': 1}", "ops": 70, "share_pct": 66.7, "tracking_since": {"$date": "2026-09-28T09:02:37.441Z"}},
+{"_id": {"$oid": "6aba2d31d64840e0a6694cd9"}, "index_name": "idx_tags", "key_pattern": "{'tags': 1}", "ops": 20, "share_pct": 19.0, "tracking_since": {"$date": "2026-09-28T09:02:38.554Z"}},
+{"_id": {"$oid": "6aba2d31d64840e0a6694cda"}, "index_name": "idx_price", "key_pattern": "{'price': 1}", "ops": 10, "share_pct": 9.5, "tracking_since": {"$date": "2026-09-28T09:02:38.024Z"}},
+{"_id": {"$oid": "6aba2d31d64840e0a6694cdb"}, "index_name": "idx_name_text", "key_pattern": "{'_fts': 'text', '_ftsx': 1}", "ops": 5, "share_pct": 4.8, "tracking_since": {"$date": "2026-09-28T09:02:39.513Z"}},
+{"_id": {"$oid": "6aba2d31d64840e0a6694cdc"}, "index_name": "_id_", "key_pattern": "{'_id': 1}", "ops": 0, "share_pct": 0.0, "tracking_since": {"$date": "2026-09-28T09:02:37.048Z"}}
+]

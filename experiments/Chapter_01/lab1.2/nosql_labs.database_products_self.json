@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "6a8fcd759677c54eb1e211f9"
+  },
+  "name": "ScyllaDB",
+  "family": "Wide-Column",
+  "data_model": "Column-Family (Cassandra-compatible)",
+  "vendor": "ScyllaDB Inc.",
+  "use_case": "Low-latency, high-throughput workloads (real-time analytics, IoT, ad-tech)",
+  "spans_multiple_families": false,
+  "reasoning": "ScyllaDB is a drop-in replacement for Apache Cassandra, re-implemented in C++ for lower latency and higher throughput. It keeps the same wide-column, partition/row data model and wire protocol, so it fits neatly into a single family: Wide-Column."
+},
+{
+  "_id": {
+    "$oid": "6a8fcd759677c54eb1e211fa"
+  },
+  "name": "InfluxDB",
+  "family": "Wide-Column / Time-Series",
+  "data_model": "Time-series (measurement, tags, fields, timestamp)",
+  "vendor": "InfluxData",
+  "use_case": "Metrics, monitoring, sensor data, DevOps observability dashboards",
+  "spans_multiple_families": true,
+  "reasoning": "InfluxDB is purpose-built for time-series data with a SQL-like query language (InfluxQL/Flux). It behaves like a specialized Wide-Column store optimized purely for time-ordered writes and range scans, so it is best treated as its own Time-Series family rather than a generic Wide-Column store."
+},
+{
+  "_id": {
+    "$oid": "6a8fcd759677c54eb1e211fb"
+  },
+  "name": "ArangoDB",
+  "family": "Multi-Model (Document + Graph + Key-Value)",
+  "data_model": "JSON Document, Property Graph, Key-Value (single engine)",
+  "vendor": "ArangoDB Inc.",
+  "use_case": "Applications needing documents, graph traversals, and key-value access without running three separate databases",
+  "spans_multiple_families": true,
+  "reasoning": "ArangoDB explicitly markets itself as a multi-model database: the same storage engine and query language (AQL) can store JSON documents, traverse graphs, and do simple key-value lookups. It deliberately spans three NoSQL families instead of fitting into one."
+}]

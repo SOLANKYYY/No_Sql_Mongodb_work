@@ -1,0 +1,245 @@
+{
+  "format": "exercise10-transactions",
+  "version": 1,
+  "activity": "bank",
+  "runId": "c4ec716dfeb44587aab817b66e827ae2",
+  "startedAt": "2026-10-14T14:58:42.706501+00:00",
+  "mongoVersion": "7.0.43",
+  "members": [
+    {
+      "name": "ex10-mongo1:27017",
+      "state": "PRIMARY",
+      "health": 1.0
+    },
+    {
+      "name": "ex10-mongo2:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    },
+    {
+      "name": "ex10-mongo3:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    }
+  ],
+  "readConcern": "snapshot",
+  "writeConcern": {
+    "w": "majority",
+    "j": true
+  },
+  "source": "live MongoDB lab run",
+  "database": "ex10_lab_bank_c4ec716dfeb44587aab817b66e827ae2",
+  "currencyUnit": "integer paise (100 paise = INR 1)",
+  "cases": [
+    {
+      "name": "Successful transfer",
+      "amount": 25000,
+      "operationId": "116c7c1de32d4e74adad183694d6a48b",
+      "outcome": "committed",
+      "error": null,
+      "before": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 100000,
+            "version": 0
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 50000,
+            "version": 0
+          }
+        ],
+        "historyCount": 0
+      },
+      "after": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 75000,
+            "version": 1
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 75000,
+            "version": 1
+          }
+        ],
+        "historyCount": 1
+      },
+      "unchanged": false,
+      "verified": true,
+      "retries": [],
+      "elapsedMs": 13.563
+    },
+    {
+      "name": "Insufficient funds",
+      "amount": 200000,
+      "operationId": "bb83c1363dc8480d9402be98aac5d764",
+      "outcome": "aborted",
+      "error": "InsufficientFunds: Source account missing or insufficient funds",
+      "before": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 75000,
+            "version": 1
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 75000,
+            "version": 1
+          }
+        ],
+        "historyCount": 1
+      },
+      "after": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 75000,
+            "version": 1
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 75000,
+            "version": 1
+          }
+        ],
+        "historyCount": 1
+      },
+      "unchanged": true,
+      "verified": true,
+      "retries": [],
+      "elapsedMs": 2.137
+    },
+    {
+      "name": "Failure after debit before credit",
+      "amount": 5000,
+      "operationId": "877b7c9229bb46bd844a42f229402335",
+      "outcome": "aborted",
+      "error": "InjectedFailure: Intentional failure after debit and before credit",
+      "before": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 75000,
+            "version": 1
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 75000,
+            "version": 1
+          }
+        ],
+        "historyCount": 1
+      },
+      "after": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 75000,
+            "version": 1
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 75000,
+            "version": 1
+          }
+        ],
+        "historyCount": 1
+      },
+      "unchanged": true,
+      "verified": true,
+      "retries": [],
+      "elapsedMs": 2.339
+    },
+    {
+      "name": "Real write conflict with retry",
+      "amount": 10000,
+      "operationId": "d7a566747c9f4798a43c8368da4c947d",
+      "outcome": "committed",
+      "error": null,
+      "before": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 75000,
+            "version": 1
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 75000,
+            "version": 1
+          }
+        ],
+        "historyCount": 1
+      },
+      "after": {
+        "accounts": [
+          {
+            "account_id": "ACC-001",
+            "balance": 65000,
+            "version": 3
+          },
+          {
+            "account_id": "ACC-002",
+            "balance": 85000,
+            "version": 2
+          }
+        ],
+        "historyCount": 2
+      },
+      "unchanged": false,
+      "verified": true,
+      "retries": [
+        {
+          "kind": "transaction-retry",
+          "attempt": 1,
+          "delaySeconds": 0.1,
+          "code": 112,
+          "label": "TransientTransactionError"
+        }
+      ],
+      "elapsedMs": 133.775
+    }
+  ],
+  "duplicateCheck": {
+    "alreadyCommitted": true,
+    "unchanged": true
+  },
+  "final": {
+    "accounts": [
+      {
+        "account_id": "ACC-001",
+        "balance": 65000,
+        "version": 3
+      },
+      {
+        "account_id": "ACC-002",
+        "balance": 85000,
+        "version": 2
+      }
+    ],
+    "historyCount": 2
+  },
+  "totalBalance": 150000,
+  "history": [
+    {
+      "transfer_id": "116c7c1de32d4e74adad183694d6a48b",
+      "from": "ACC-001",
+      "to": "ACC-002",
+      "amount": 25000,
+      "timestamp": "2026-10-14T14:58:42.917121+00:00"
+    },
+    {
+      "transfer_id": "d7a566747c9f4798a43c8368da4c947d",
+      "from": "ACC-001",
+      "to": "ACC-002",
+      "amount": 10000,
+      "timestamp": "2026-10-14T14:58:43.058209+00:00"
+    }
+  ],
+  "verified": true,
+  "finishedAt": "2026-10-14T14:58:43.073100+00:00"
+}

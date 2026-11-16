@@ -1,0 +1,156 @@
+{
+  "timestamp": "2026-11-12T17:18:03.314365+00:00",
+  "tenants": 5,
+  "documents_per_tenant": 100,
+  "total_documents": 500,
+  "first_copy": [
+    {
+      "tenant": "tenant_0",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "50a0954b793dad47d643d3b67f0ba32949f6dea0956e360c5a983b69f863b8f0",
+      "target_sha256": "50a0954b793dad47d643d3b67f0ba32949f6dea0956e360c5a983b69f863b8f0",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_1",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "1ef1e91f1c1310e49a23c25a94831d010196062dfc8c6f3dc39b9a793cb2da53",
+      "target_sha256": "1ef1e91f1c1310e49a23c25a94831d010196062dfc8c6f3dc39b9a793cb2da53",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_2",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "b8237898d40d6fdcc2b89e12208f8142015ad4a4a4142e04f189c3950be27cd8",
+      "target_sha256": "b8237898d40d6fdcc2b89e12208f8142015ad4a4a4142e04f189c3950be27cd8",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_3",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "53e73a1ed232dc1467fa6c514f617bf5f6b87969a9a1495c77394aa5d53fbab9",
+      "target_sha256": "53e73a1ed232dc1467fa6c514f617bf5f6b87969a9a1495c77394aa5d53fbab9",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_4",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "e197d5ee582fd394d281151f56c29d69886bab9ae7962e8b4e9076b58927e407",
+      "target_sha256": "e197d5ee582fd394d281151f56c29d69886bab9ae7962e8b4e9076b58927e407",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    }
+  ],
+  "repeat_copy": [
+    {
+      "tenant": "tenant_0",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "50a0954b793dad47d643d3b67f0ba32949f6dea0956e360c5a983b69f863b8f0",
+      "target_sha256": "50a0954b793dad47d643d3b67f0ba32949f6dea0956e360c5a983b69f863b8f0",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_1",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "1ef1e91f1c1310e49a23c25a94831d010196062dfc8c6f3dc39b9a793cb2da53",
+      "target_sha256": "1ef1e91f1c1310e49a23c25a94831d010196062dfc8c6f3dc39b9a793cb2da53",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_2",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "b8237898d40d6fdcc2b89e12208f8142015ad4a4a4142e04f189c3950be27cd8",
+      "target_sha256": "b8237898d40d6fdcc2b89e12208f8142015ad4a4a4142e04f189c3950be27cd8",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_3",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "53e73a1ed232dc1467fa6c514f617bf5f6b87969a9a1495c77394aa5d53fbab9",
+      "target_sha256": "53e73a1ed232dc1467fa6c514f617bf5f6b87969a9a1495c77394aa5d53fbab9",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    },
+    {
+      "tenant": "tenant_4",
+      "source_count": 100,
+      "target_count": 100,
+      "source_sha256": "e197d5ee582fd394d281151f56c29d69886bab9ae7962e8b4e9076b58927e407",
+      "target_sha256": "e197d5ee582fd394d281151f56c29d69886bab9ae7962e8b4e9076b58927e407",
+      "no_cross_tenant_documents": true,
+      "passed": true
+    }
+  ],
+  "idempotent": true,
+  "source_unchanged": true,
+  "rollback_source_preserved": true,
+  "aggregate_counts_equal": true,
+  "timings": {
+    "list_one_tenant": {
+      "shared": {
+        "repeats": 20,
+        "median_ms": 0.6010620004417433,
+        "mean_ms": 0.6036152500655589,
+        "min_ms": 0.529204000486061,
+        "max_ms": 0.7070720002957387
+      },
+      "collection_per_tenant": {
+        "repeats": 20,
+        "median_ms": 0.5651380001836515,
+        "mean_ms": 0.5696185499800777,
+        "min_ms": 0.5340010002328199,
+        "max_ms": 0.6323520001387806
+      }
+    },
+    "cross_tenant_counts": {
+      "shared": {
+        "repeats": 20,
+        "median_ms": 0.658723999549693,
+        "mean_ms": 0.6564392499512905,
+        "min_ms": 0.6060289997549262,
+        "max_ms": 0.6998600001679733
+      },
+      "collection_per_tenant": {
+        "repeats": 20,
+        "median_ms": 1.964511000096536,
+        "mean_ms": 1.9200560000172118,
+        "min_ms": 1.5783990002091741,
+        "max_ms": 2.1093880004627863
+      }
+    },
+    "create_task": {
+      "shared": {
+        "repeats": 20,
+        "median_ms": 2.996111999891582,
+        "mean_ms": 3.024028150093727,
+        "min_ms": 2.1191430005274015,
+        "max_ms": 5.1987460001328145
+      },
+      "collection_per_tenant": {
+        "repeats": 20,
+        "median_ms": 2.9159750001781504,
+        "mean_ms": 3.090836900219074,
+        "min_ms": 2.0776560004378553,
+        "max_ms": 4.882656000518182
+      }
+    }
+  },
+  "passed": true,
+  "scope": "offline lab copy with no concurrent writers; application cutover is not performed"
+}

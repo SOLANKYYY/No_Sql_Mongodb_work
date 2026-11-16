@@ -1,0 +1,6 @@
+[
+{"_id": {"$oid": "6aba2d47926dd0d3aa3f9507"}, "variant": "A. Not covered - full documents returned", "projection": "None", "plan": "FETCH -> IXSCAN", "index": "idx_city_age", "docs_examined": 617, "keys_examined": 617, "n_returned": 617, "fetch_stage_present": true, "covered": false},
+{"_id": {"$oid": "6aba2d47926dd0d3aa3f9508"}, "variant": "B. Not covered - projection includes _id (forgot _id: 0)", "projection": "{'city': 1, 'age': 1}", "plan": "PROJECTION_SIMPLE -> FETCH -> IXSCAN", "index": "idx_city_age", "docs_examined": 617, "keys_examined": 617, "n_returned": 617, "fetch_stage_present": true, "covered": false},
+{"_id": {"$oid": "6aba2d47926dd0d3aa3f9509"}, "variant": "C. COVERED - only indexed fields, _id excluded", "projection": "{'_id': 0, 'city': 1, 'age': 1}", "plan": "PROJECTION_COVERED -> IXSCAN", "index": "idx_city_age", "docs_examined": 0, "keys_examined": 617, "n_returned": 617, "fetch_stage_present": false, "covered": true},
+{"_id": {"$oid": "6aba2d47926dd0d3aa3f950a"}, "variant": "timing", "not_covered_ms": 3.055, "covered_ms": 1.916, "speedup_x": 1.59}
+]

@@ -1,0 +1,145 @@
+{
+  "timestamp": "2026-11-12T17:02:43.336099+00:00",
+  "passed": true,
+  "interval_seconds": 30,
+  "elapsed_seconds": 60.112,
+  "samples": [
+    {
+      "timestamp": "2026-11-12T17:01:43.300434+00:00",
+      "uptime": 22.0,
+      "connections": {
+        "current": 3,
+        "available": 13104,
+        "totalCreated": 24,
+        "rejected": 0,
+        "active": 2,
+        "queuedForEstablishment": 0,
+        "establishmentRateLimit": {
+          "rejected": 0,
+          "exempted": 0,
+          "interruptedDueToClientDisconnect": 0
+        },
+        "threaded": 3,
+        "exhaustIsMaster": 0,
+        "exhaustHello": 0,
+        "awaitingTopologyChanges": 1
+      },
+      "opcounters": {
+        "insert": 2,
+        "query": 18,
+        "update": 2,
+        "delete": 0,
+        "getmore": 0,
+        "command": 65
+      },
+      "cache_bytes": 188367,
+      "cache_max_bytes": 321912832,
+      "cache_dirty_bytes": 158633,
+      "pages_read": 0,
+      "pages_requested": 1288,
+      "cache_hit_percent": null,
+      "members": [
+        {
+          "name": "mongo:27017",
+          "state": "PRIMARY",
+          "health": 1.0
+        }
+      ],
+      "replication_lag_seconds": {},
+      "replica_note": "No secondary member; lag is N/A, not zero.",
+      "alerts": []
+    },
+    {
+      "timestamp": "2026-11-12T17:02:13.302178+00:00",
+      "uptime": 52.0,
+      "connections": {
+        "current": 3,
+        "available": 13104,
+        "totalCreated": 53,
+        "rejected": 0,
+        "active": 2,
+        "queuedForEstablishment": 0,
+        "establishmentRateLimit": {
+          "rejected": 0,
+          "exempted": 0,
+          "interruptedDueToClientDisconnect": 0
+        },
+        "threaded": 3,
+        "exhaustIsMaster": 0,
+        "exhaustHello": 1,
+        "awaitingTopologyChanges": 1
+      },
+      "opcounters": {
+        "insert": 2,
+        "query": 18,
+        "update": 2,
+        "delete": 0,
+        "getmore": 0,
+        "command": 140
+      },
+      "cache_bytes": 189312,
+      "cache_max_bytes": 321912832,
+      "cache_dirty_bytes": 159578,
+      "pages_read": 0,
+      "pages_requested": 1363,
+      "cache_hit_percent": 100.0,
+      "members": [
+        {
+          "name": "mongo:27017",
+          "state": "PRIMARY",
+          "health": 1.0
+        }
+      ],
+      "replication_lag_seconds": {},
+      "replica_note": "No secondary member; lag is N/A, not zero.",
+      "alerts": []
+    },
+    {
+      "timestamp": "2026-11-12T17:02:43.327718+00:00",
+      "uptime": 82.0,
+      "connections": {
+        "current": 3,
+        "available": 13104,
+        "totalCreated": 82,
+        "rejected": 0,
+        "active": 2,
+        "queuedForEstablishment": 0,
+        "establishmentRateLimit": {
+          "rejected": 0,
+          "exempted": 0,
+          "interruptedDueToClientDisconnect": 0
+        },
+        "threaded": 3,
+        "exhaustIsMaster": 0,
+        "exhaustHello": 1,
+        "awaitingTopologyChanges": 1
+      },
+      "opcounters": {
+        "insert": 2,
+        "query": 18,
+        "update": 2,
+        "delete": 0,
+        "getmore": 0,
+        "command": 216
+      },
+      "cache_bytes": 258110,
+      "cache_max_bytes": 321912832,
+      "cache_dirty_bytes": 11602,
+      "pages_read": 0,
+      "pages_requested": 1667,
+      "cache_hit_percent": 100.0,
+      "members": [
+        {
+          "name": "mongo:27017",
+          "state": "PRIMARY",
+          "health": 1.0
+        }
+      ],
+      "replication_lag_seconds": {},
+      "replica_note": "No secondary member; lag is N/A, not zero.",
+      "alerts": []
+    }
+  ],
+  "sample_count": 3,
+  "source": "live MongoDB serverStatus / replSetGetStatus"
+}

@@ -1,0 +1,128 @@
+{
+  "lab": "13.1 failover",
+  "timestamp": "2026-11-11T15:03:31.862408+00:00",
+  "old_primary": "mongo1:27017",
+  "new_primary": "mongo2:27017",
+  "stepdown_requested_at": "2026-11-11T15:03:26.795277+00:00",
+  "election_observed_seconds": 0.061,
+  "successful_samples": 16,
+  "transient_failures": 0,
+  "post_stepdown_successes": 10,
+  "acknowledged_documents_preserved": true,
+  "members_after": [
+    {
+      "name": "mongo1:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    },
+    {
+      "name": "mongo2:27017",
+      "state": "PRIMARY",
+      "health": 1.0
+    },
+    {
+      "name": "mongo3:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    }
+  ],
+  "samples": [
+    {
+      "timestamp": "2026-11-11T15:03:23.794917+00:00",
+      "sequence": 0,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:24.302662+00:00",
+      "sequence": 1,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:24.808948+00:00",
+      "sequence": 2,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:25.315181+00:00",
+      "sequence": 3,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:25.822220+00:00",
+      "sequence": 4,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:26.330189+00:00",
+      "sequence": 5,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:26.837418+00:00",
+      "sequence": 6,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:27.365773+00:00",
+      "sequence": 7,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:27.872497+00:00",
+      "sequence": 8,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:28.378100+00:00",
+      "sequence": 9,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:28.886377+00:00",
+      "sequence": 10,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:29.392677+00:00",
+      "sequence": 11,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:29.898737+00:00",
+      "sequence": 12,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:30.405145+00:00",
+      "sequence": 13,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:30.911055+00:00",
+      "sequence": 14,
+      "read_ok": true,
+      "write_ok": true
+    },
+    {
+      "timestamp": "2026-11-11T15:03:31.416777+00:00",
+      "sequence": 15,
+      "read_ok": true,
+      "write_ok": true
+    }
+  ],
+  "passed": true
+}

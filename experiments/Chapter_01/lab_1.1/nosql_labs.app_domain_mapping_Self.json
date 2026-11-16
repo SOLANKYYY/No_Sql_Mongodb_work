@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6a8fcdb6f217c3afbc120c85"
+  },
+  "app": "Healthcare Platform",
+  "domain": "patient_records",
+  "description": "Patient demographics, medical history, allergies, medications - fields vary widely per patient",
+  "read_write_pattern": "Read-heavy, occasional structured updates, needs flexible schema",
+  "recommended_family": "Document",
+  "recommended_db": "MongoDB",
+  "rationale": "Patient records have a semi-structured, evolving schema (not every patient has the same fields), so a document model avoids constant schema migrations while still allowing indexed queries."
+},
+{
+  "_id": {
+    "$oid": "6a8fcdb6f217c3afbc120c86"
+  },
+  "app": "Healthcare Platform",
+  "domain": "vital_signs_stream",
+  "description": "Continuous heart-rate, SpO2, and blood-pressure readings from bedside/wearable monitors",
+  "read_write_pattern": "Extremely write-heavy, time-ordered, queried by time range",
+  "recommended_family": "Wide-Column",
+  "recommended_db": "Apache Cassandra",
+  "rationale": "Vital-sign streams are high-frequency, append-only, and queried by patient + time range, which matches Cassandra's partitioned, time-ordered wide-row model."
+},
+{
+  "_id": {
+    "$oid": "6a8fcdb6f217c3afbc120c87"
+  },
+  "app": "Healthcare Platform",
+  "domain": "provider_referral_network",
+  "description": "Relationships between doctors, specialists, hospitals, and patient referrals",
+  "read_write_pattern": "Multi-hop traversal queries, e.g. 'find a specialist reachable through my GP's referral network'",
+  "recommended_family": "Graph",
+  "recommended_db": "Neo4j",
+  "rationale": "Referral and provider networks are inherently relationship-centric, so a graph database gives efficient traversal for referral chains, fraud detection, and network analysis."
+},
+{
+  "_id": {
+    "$oid": "6a8fcdb6f217c3afbc120c88"
+  },
+  "app": "Healthcare Platform",
+  "domain": "medical_imaging",
+  "description": "X-ray, MRI, and CT scan image/DICOM files linked to a patient record",
+  "read_write_pattern": "Write-once, read-many, large binary objects delivered via CDN/PACS",
+  "recommended_family": "Object/Key-Value",
+  "recommended_db": "Amazon S3",
+  "rationale": "Large binary imaging files are best stored as objects keyed by patient/study ID rather than inside a database record, with lightweight metadata pointers kept in MongoDB."
+}]

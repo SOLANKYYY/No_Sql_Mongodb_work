@@ -1,0 +1,9 @@
+.env
+.cache/
+results/
+screenshots/
+data/*
+!data/README.md
+!data/documents.json
+*.zip
+__pycache__/

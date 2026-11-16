@@ -1,0 +1,117 @@
+name: exercise13
+services:
+  key-init:
+    image: mongo:7.0
+    user: 0:0
+    restart: 'no'
+    entrypoint:
+    - bash
+    - -ec
+    - cp /source/keyfile /key/keyfile; chown 999:999 /key/keyfile; chmod 400 /key/keyfile
+    volumes:
+    - ./.secrets/keyfile:/source/keyfile:ro
+    - mongo-key:/key
+  mongo1:
+    image: mongo:7.0
+    restart: unless-stopped
+    command: &id001
+    - mongod
+    - --replSet
+    - rs0
+    - --keyFile
+    - /run/mongo-key/keyfile
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.3'
+    env_file: &id002
+    - .env
+    environment: &id003
+      RS_HOSTS: mongo1:27017,mongo2:27017,mongo3:27017
+    depends_on: &id004
+      key-init:
+        condition: service_completed_successfully
+    healthcheck: &id005
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    mem_limit: 1g
+    logging: &id006
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    volumes:
+    - mongo1-data:/data/db
+    - mongo-key:/run/mongo-key:ro
+    - ./scripts:/scripts:ro
+  mongo2:
+    image: mongo:7.0
+    restart: unless-stopped
+    command: *id001
+    env_file: *id002
+    environment: *id003
+    depends_on: *id004
+    healthcheck: *id005
+    mem_limit: 1g
+    logging: *id006
+    volumes:
+    - mongo2-data:/data/db
+    - mongo-key:/run/mongo-key:ro
+    - ./scripts:/scripts:ro
+  mongo3:
+    image: mongo:7.0
+    restart: unless-stopped
+    command: *id001
+    env_file: *id002
+    environment: *id003
+    depends_on: *id004
+    healthcheck: *id005
+    mem_limit: 1g
+    logging: *id006
+    volumes:
+    - mongo3-data:/data/db
+    - mongo-key:/run/mongo-key:ro
+    - ./scripts:/scripts:ro
+  runner:
+    image: ${LAB_IMAGE:-exercise13-runner:local}
+    profiles:
+    - tools
+    env_file:
+    - .env
+    environment:
+      RESULTS_DIR: /results
+    volumes:
+    - ./results:/results
+  exporter:
+    image: ${LAB_IMAGE:-exercise13-runner:local}
+    restart: unless-stopped
+    env_file:
+    - .env
+    command:
+    - exporter
+    depends_on:
+      mongo1:
+        condition: service_healthy
+    ports:
+    - 127.0.0.1:9216:9216
+  prometheus:
+    image: prom/prometheus:v3.0.1
+    restart: unless-stopped
+    volumes:
+    - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    - prometheus-data:/prometheus
+    ports:
+    - 127.0.0.1:9090:9090
+volumes:
+  mongo-key: {}
+  mongo1-data: {}
+  mongo2-data: {}
+  mongo3-data: {}
+  prometheus-data: {}

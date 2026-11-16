@@ -1,0 +1,6 @@
+{
+  "timestamp": "2026-11-12T17:01:17.332041+00:00",
+  "passed": true,
+  "kind": "mocked drivers and deterministic circuit-breaker tests; not live database evidence",
+  "output": "test_both_thresholds (test_logic.MonitoringTests) ... ok\ntest_hit_uses_deltas (test_logic.MonitoringTests) ... ok\ntest_idle_not_zero_hit (test_logic.MonitoringTests) ... ok\ntest_no_initial_fake_hit (test_logic.MonitoringTests) ... ok\ntest_no_secondary_is_na (test_logic.MonitoringTests) ... ok\ntest_replication_datetime_difference (test_logic.MonitoringTests) ... ok\ntest_restart_not_negative_hit (test_logic.MonitoringTests) ... ok\ntest_threshold_boundaries (test_logic.MonitoringTests) ... ok\ntest_unavailable_counters (test_logic.MonitoringTests) ... ok\ntest_cleanup_only_old_completed_owned_folders (test_logic.RetentionTests) ... ok\ntest_does_not_follow_symlink (test_logic.RetentionTests) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.003s\n\nOK\n"
+}

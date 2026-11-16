@@ -1,0 +1,62 @@
+
+============================================================
+  Lab 6.2: Compare Index Strategies
+============================================================
+
+[OK] Connected to MongoDB at mongodb://localhost:27017
+=== Step 1: Insert 10,000 documents with NO indexes (except _id) ===
+  0 extra indexes: 10000 inserts in 0.059s = 169,545 docs/sec
+
+=== Step 2: Create 5 indexes, then insert another 10,000 documents ===
+  Created: idx_user_id, idx_email, idx_city, idx_age, idx_score
+  5 extra indexes: 10000 inserts in 0.402s = 24,888 docs/sec
+
+  Write slowdown with 5 indexes: +581.2%
+
+=== Read benchmark: all 5 indexes present (20 runs per query) ===
+  Q1 user_id lookup         0.430 ms/query   plan=FETCH -> IXSCAN   docs_examined=1
+  Q2 email lookup           0.425 ms/query   plan=FETCH -> IXSCAN   docs_examined=1
+  Q3 city equality          2.486 ms/query   plan=FETCH -> IXSCAN   docs_examined=771
+  Q4 age range 30-31        3.144 ms/query   plan=FETCH -> IXSCAN   docs_examined=806
+  Q5 score >= 99.5          1.001 ms/query   plan=FETCH -> IXSCAN   docs_examined=107
+
+=== Step 3: Drop all indexes except idx_user_id (the most critical) ===
+  dropped idx_email
+  dropped idx_city
+  dropped idx_age
+  dropped idx_score
+
+=== Read benchmark: only idx_user_id kept (20 runs per query) ===
+  Q1 user_id lookup         0.383 ms/query   plan=FETCH -> IXSCAN   docs_examined=1
+  Q2 email lookup          27.690 ms/query   plan=COLLSCAN   docs_examined=20000
+  Q3 city equality         24.550 ms/query   plan=COLLSCAN   docs_examined=20000
+  Q4 age range 30-31       38.490 ms/query   plan=COLLSCAN   docs_examined=20000
+  Q5 score >= 99.5         33.309 ms/query   plan=COLLSCAN   docs_examined=20000
+
+[3m                           Read performance: 5 indexes vs 1 index                            [0m
++-------------------------------------------------------------------------------------------+
+|[1m [0m[1mQuery                 [0m[1m [0m|[1m [0m[1m5 idx (ms)[0m[1m [0m|[1m [0m[1m1 idx (ms)[0m[1m [0m|[1m [0m[1mSlower by[0m[1m [0m|[1m [0m[1mPlan with 1 index         [0m[1m [0m|
+|------------------------+------------+------------+-----------+----------------------------|
+| Q1 user_id lookup      |      0.430 |      0.383 |      0.9x | FETCH -> IXSCAN            |
+|------------------------+------------+------------+-----------+----------------------------|
+| Q2 email lookup        |      0.425 |     27.690 |     65.2x | COLLSCAN                   |
+|------------------------+------------+------------+-----------+----------------------------|
+| Q3 city equality       |      2.486 |     24.550 |      9.9x | COLLSCAN                   |
+|------------------------+------------+------------+-----------+----------------------------|
+| Q4 age range 30-31     |      3.144 |     38.490 |     12.2x | COLLSCAN                   |
+|------------------------+------------+------------+-----------+----------------------------|
+| Q5 score >= 99.5       |      1.001 |     33.309 |     33.3x | COLLSCAN                   |
++-------------------------------------------------------------------------------------------+
+
+=== Step 4: Analysis - query performance vs write throughput ===
+  Inserting 10,000 documents took 0.059s with no indexes and 0.402s with 5 indexes (+581.2% write time; 169,545 vs 24,888 docs/sec), because every insert must also update all 5 index B-trees. In return, indexed queries read only matching entries instead of scanning the whole collection. After dropping to the single idx_user_id index, 4 of 5 queries fell back to COLLSCAN (Q2 email lookup, Q3 city equality, Q4 age range 30-31, Q5 score >= 99.5) and 4 of 5 became at least 1.5x slower (Q2 email lookup, Q3 city equality, Q4 age range 30-31, Q5 score >= 99.5). Trade-off: every extra index buys read speed for the queries it serves but costs write throughput and storage on every insert, so keep only the indexes that serve frequent, selective queries. Read-heavy workloads justify more indexes; write-heavy workloads (logs, IoT) should keep them minimal.
+
+[OK] Stored results in nosql_labs.index_strategy_results
+[OK] Exported 1 documents from 'index_strategy_results' to index_strategy_results.json
+[OK] Exported 20000 documents from 'write_perf_test' to write_perf_test.json
+[OK] Terminal output saved to output.txt
+
+============================================================
+  Lab 6.2 Complete
+============================================================
+

@@ -1,0 +1,6 @@
+{
+  "timestamp": "2026-11-12T18:18:28.046546+00:00",
+  "passed": true,
+  "kind": "mocked drivers and deterministic circuit-breaker tests; not live database evidence",
+  "output": "test_recovery_failure_reopens (test_logic.CircuitTests) ... ok\ntest_success_resets_consecutive_errors (test_logic.CircuitTests) ... ok\ntest_three_failures_then_skip_and_retry_after_30s (test_logic.CircuitTests) ... ok\ntest_failed_backend_keeps_other_results (test_logic.HybridTests) ... ok\ntest_hops_rejects_injection_and_extreme_values (test_logic.HybridTests) ... ok\ntest_routes_to_three_drivers (test_logic.HybridTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.005s\n\nOK\n"
+}

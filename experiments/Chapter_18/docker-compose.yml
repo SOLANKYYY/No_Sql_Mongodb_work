@@ -1,0 +1,84 @@
+name: experiment18
+services:
+  mongo:
+    image: mongo:7.0
+    command:
+    - mongod
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.3'
+    volumes:
+    - mongo-data:/data/db
+    mem_limit: 1g
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: &id001
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'
+  runner:
+    image: ${LAB_IMAGE:-experiment18-runner:local}
+    env_file: .env
+    environment:
+      RESULTS_DIR: /results
+      SCREENSHOTS_DIR: /screenshots
+    volumes:
+    - ./results:/results
+    - ./screenshots:/screenshots:ro
+    - ./data:/data:ro
+    logging: *id001
+    profiles:
+    - tools
+  cassandra:
+    image: cassandra:4.1
+    environment:
+      MAX_HEAP_SIZE: 1G
+      HEAP_NEWSIZE: 256M
+      CASSANDRA_CLUSTER_NAME: Exercise18
+      CASSANDRA_DC: datacenter1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+    mem_limit: 2g
+    volumes:
+    - cassandra-data:/var/lib/cassandra
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - cqlsh -e 'SELECT release_version FROM system.local' >/dev/null 2>&1
+      interval: 15s
+      timeout: 10s
+      retries: 40
+      start_period: 60s
+    logging: *id001
+  neo4j:
+    image: neo4j:5.26-community
+    environment:
+      NEO4J_AUTH: none
+      NEO4J_server_memory_heap_initial__size: 256m
+      NEO4J_server_memory_heap_max__size: 512m
+      NEO4J_server_memory_pagecache_size: 256m
+    mem_limit: 1200m
+    volumes:
+    - neo4j-data:/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - cypher-shell 'RETURN 1' >/dev/null 2>&1
+      interval: 10s
+      timeout: 10s
+      retries: 40
+      start_period: 40s
+    logging: *id001
+volumes:
+  mongo-data: null
+  cassandra-data: null
+  neo4j-data: null

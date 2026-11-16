@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-11-12T18:18:32.736586+00:00",
+  "live_backends": [
+    "MongoDB",
+    "Cassandra",
+    "Neo4j"
+  ],
+  "expected": {
+    "courses_for_S1": [
+      "C1",
+      "C2"
+    ],
+    "students_in_C1": [
+      "S1",
+      "S2"
+    ],
+    "shared_course_peers_of_S1": [
+      "S2",
+      "S3"
+    ]
+  },
+  "observed": {
+    "mongodb": {
+      "courses_for_S1": [
+        "C1",
+        "C2"
+      ],
+      "students_in_C1": [
+        "S1",
+        "S2"
+      ],
+      "shared_course_peers_of_S1": [
+        "S2",
+        "S3"
+      ]
+    },
+    "cassandra": {
+      "courses_for_S1": [
+        "C1",
+        "C2"
+      ],
+      "students_in_C1": [
+        "S1",
+        "S2"
+      ],
+      "shared_course_peers_of_S1": [
+        "S2",
+        "S3"
+      ]
+    },
+    "neo4j": {
+      "courses_for_S1": [
+        "C1",
+        "C2"
+      ],
+      "students_in_C1": [
+        "S1",
+        "S2"
+      ],
+      "shared_course_peers_of_S1": [
+        "S2",
+        "S3"
+      ]
+    }
+  },
+  "hybrid_enrollment_activity": {
+    "operational_student": {
+      "_id": "S1",
+      "name": "Alice",
+      "course_ids": [
+        "C1",
+        "C2"
+      ]
+    },
+    "audit_event_count": 2,
+    "prerequisites_for_C3": [
+      "C1",
+      "C2"
+    ]
+  },
+  "timings": {
+    "mongodb": {
+      "samples": 20,
+      "median_ms": 1.0938609998447646,
+      "mean_ms": 1.0608494500502275,
+      "min_ms": 0.9064799996849615,
+      "max_ms": 1.2173579998489004
+    },
+    "cassandra": {
+      "samples": 20,
+      "median_ms": 5.517693499768939,
+      "mean_ms": 5.820015949984736,
+      "min_ms": 4.744474000290211,
+      "max_ms": 8.85922199995548
+    },
+    "neo4j": {
+      "samples": 20,
+      "median_ms": 11.277881999831152,
+      "mean_ms": 12.145489100066698,
+      "min_ms": 8.35900899983244,
+      "max_ms": 31.039619000694074
+    }
+  },
+  "passed": true
+}

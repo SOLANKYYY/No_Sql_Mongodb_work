@@ -1,0 +1,13 @@
+﻿{
+    "verified_pull":  true,
+    "timestamp":  "2026-11-12T17:06:04.4381124Z",
+    "docker_url":  "https://hub.docker.com/r/solankyyy/nosql-exercise14",
+    "digest":  {
+                   "value":  [
+                                 "experiment14-runner@sha256:28afd7004ef7570b813a33afba140aacaf5b9abc170bf62bba73f3536bdd5b66",
+                                 "solankyyy/nosql-exercise14@sha256:28afd7004ef7570b813a33afba140aacaf5b9abc170bf62bba73f3536bdd5b66"
+                             ],
+                   "Count":  2
+               },
+    "image":  "solankyyy/nosql-exercise14:exercise14"
+}

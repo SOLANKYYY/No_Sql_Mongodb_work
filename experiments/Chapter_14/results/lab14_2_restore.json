@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-11-12T17:02:52.306438+00:00",
+  "documents": 1000,
+  "before": {
+    "count": 1000,
+    "sha256": "d8a5d8162bec14fab264ee67114890862436649a7c1eebff7a9c158df90bac5c"
+  },
+  "modified": {
+    "count": 1000,
+    "sha256": "4ac3a672cbf1daf5899bfcdf0037ddf41d363bfdfbe25cf4acbd8189bb23ebea"
+  },
+  "after": {
+    "count": 1000,
+    "sha256": "d8a5d8162bec14fab264ee67114890862436649a7c1eebff7a9c158df90bac5c"
+  },
+  "backup_seconds": 0.23389525299990055,
+  "restore_seconds": 0.23112169299974994,
+  "recovery_verified_seconds": 0.2565043049999076,
+  "application_read_ready": true,
+  "passed": true,
+  "backup_directory": "backup-20261112T170251628337Z"
+}

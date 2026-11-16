@@ -1,0 +1,4 @@
+pymongo==4.10.1
+reportlab==4.2.5
+pillow==10.4.0
+cryptography==44.0.0

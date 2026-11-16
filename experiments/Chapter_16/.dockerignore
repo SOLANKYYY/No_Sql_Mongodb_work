@@ -1,0 +1,13 @@
+.env
+.env.*
+.secrets
+backups
+logs
+screenshots
+**/__pycache__
+**/*.pyc
+*.zip
+.git
+results/*.pdf
+results/published.json
+results/scheduler_status.json

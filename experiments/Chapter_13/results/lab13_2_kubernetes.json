@@ -1,0 +1,80 @@
+{
+  "lab": "13.2",
+  "timestamp": "2026-11-11T15:11:27.2466324Z",
+  "context": "docker-desktop",
+  "passed": true,
+  "pod_name": "mongo-2",
+  "old_pod_uid": "0e4421ce-4cde-4a7c-90f9-0c94e88ca024",
+  "new_pod_uid": "814c02b3-883f-4daa-ae1a-0d2fcdb1373a",
+  "persistent_volumes_reused": true,
+  "storage": [
+    {
+      "name": "mongo-data-mongo-0",
+      "uid_before": "f399f700-0096-422d-8822-7ede25bf2e5b",
+      "uid_after": "f399f700-0096-422d-8822-7ede25bf2e5b",
+      "volume_before": "pvc-f399f700-0096-422d-8822-7ede25bf2e5b",
+      "volume_after": "pvc-f399f700-0096-422d-8822-7ede25bf2e5b",
+      "phase": "Bound"
+    },
+    {
+      "name": "mongo-data-mongo-1",
+      "uid_before": "a77ebbce-2e10-4af5-a029-13b99175860c",
+      "uid_after": "a77ebbce-2e10-4af5-a029-13b99175860c",
+      "volume_before": "pvc-a77ebbce-2e10-4af5-a029-13b99175860c",
+      "volume_after": "pvc-a77ebbce-2e10-4af5-a029-13b99175860c",
+      "phase": "Bound"
+    },
+    {
+      "name": "mongo-data-mongo-2",
+      "uid_before": "15f33a35-0af2-411d-8025-738e4a81e5da",
+      "uid_after": "15f33a35-0af2-411d-8025-738e4a81e5da",
+      "volume_before": "pvc-15f33a35-0af2-411d-8025-738e4a81e5da",
+      "volume_after": "pvc-15f33a35-0af2-411d-8025-738e4a81e5da",
+      "phase": "Bound"
+    }
+  ],
+  "before": {
+    "passed": true,
+    "members": [
+      {
+        "name": "mongo-0.mongo-headless-svc.exercise13.svc.cluster.local:27017",
+        "state": "PRIMARY",
+        "health": 1
+      },
+      {
+        "name": "mongo-1.mongo-headless-svc.exercise13.svc.cluster.local:27017",
+        "state": "SECONDARY",
+        "health": 1
+      },
+      {
+        "name": "mongo-2.mongo-headless-svc.exercise13.svc.cluster.local:27017",
+        "state": "SECONDARY",
+        "health": 1
+      }
+    ],
+    "sentinel": "survives-pod-recreation",
+    "directReadMember": "mongo-2.mongo-headless-svc.exercise13.svc.cluster.local:27017"
+  },
+  "after": {
+    "passed": true,
+    "members": [
+      {
+        "name": "mongo-0.mongo-headless-svc.exercise13.svc.cluster.local:27017",
+        "state": "PRIMARY",
+        "health": 1
+      },
+      {
+        "name": "mongo-1.mongo-headless-svc.exercise13.svc.cluster.local:27017",
+        "state": "SECONDARY",
+        "health": 1
+      },
+      {
+        "name": "mongo-2.mongo-headless-svc.exercise13.svc.cluster.local:27017",
+        "state": "SECONDARY",
+        "health": 1
+      }
+    ],
+    "sentinel": "survives-pod-recreation",
+    "directReadMember": "mongo-2.mongo-headless-svc.exercise13.svc.cluster.local:27017"
+  }
+}

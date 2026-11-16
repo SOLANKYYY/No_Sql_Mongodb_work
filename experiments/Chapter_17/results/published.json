@@ -1,0 +1,7 @@
+{
+    "verified_pull":  true,
+    "timestamp":  "2026-11-13T10:59:49.9547992Z",
+    "docker_url":  "https://hub.docker.com/r/solankyyy/nosql-exercise17",
+    "digest":  "solankyyy/nosql-exercise17@sha256:386d3c80dc864271a6dee8c06851e33370bf27c4261e07c2406971582442ba2c",
+    "image":  "solankyyy/nosql-exercise17:exercise17"
+}

@@ -1,0 +1,30 @@
+name: experiment17
+services:
+  mongo:
+    image: mongodb/mongodb-atlas-local:8.0
+    hostname: mongo
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+      - mongo-search:/data/mongot
+    mem_limit: 3g
+    # Use the image's built-in health check for mongod AND mongot readiness.
+    logging: &logs
+      driver: json-file
+      options: {max-size: '5m', max-file: '2'}
+  runner:
+    image: ${LAB_IMAGE:-experiment17-runner:local}
+    env_file: .env
+    environment:
+      RESULTS_DIR: /results
+      SCREENSHOTS_DIR: /screenshots
+    volumes:
+      - ./results:/results
+      - ./screenshots:/screenshots:ro
+      - ./.cache:/cache
+    profiles: [tools]
+    logging: *logs
+volumes:
+  mongo-data:
+  mongo-config:
+  mongo-search:

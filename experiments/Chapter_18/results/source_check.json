@@ -1,0 +1,20 @@
+{
+  "mode": "user-supplied export",
+  "source_name": "Signal Desk / CIRCL and Botvrij public MISP feeds",
+  "collected_at": "2026-11-13T12:32:27.452143+00:00",
+  "origin_attestation": "Fetched original public MISP JSON. Attributes are feed claims, not independently confirmed incidents. No synthetic padding.",
+  "raw_export_sha256": "6f45e360306b9075c543f4159a23af20d5044315f37779dff4dda6f8aefef1cb",
+  "normalized_sha256": "3e9c3e05e2311b4132569549e9f2329c7af7da905061020fedae4ac98b72c225",
+  "available_unique": 15000,
+  "selected": 15000,
+  "duplicates_removed": 0,
+  "sources": 3,
+  "oldest": "2026-08-12T19:01:53.000+00:00",
+  "newest": "2026-10-29T12:57:15.000+00:00",
+  "selection": "Up to 15,000 most recent supplied records; partial feed coverage",
+  "assignment_requested": 100000,
+  "adaptation": "User-requested reduced workload; does not satisfy the original 100,000-record requirement",
+  "record_unit": "MISP indicator attribute",
+  "timestamp_basis": "attribute modification time, not observed attack time",
+  "target_basis": "reported observable, not a victim or attack destination"
+}

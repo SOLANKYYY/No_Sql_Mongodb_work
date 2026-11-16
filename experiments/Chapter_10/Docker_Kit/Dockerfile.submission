@@ -1,0 +1,3 @@
+FROM exercise10-transactions:local
+COPY results/lab_10_1_bank.json results/lab_10_2_inventory.json results/lab_10_3_durability.json /evidence/
+COPY results/Exercise_10_Report.pdf results/throughput.png results/faculty-results.txt /evidence/

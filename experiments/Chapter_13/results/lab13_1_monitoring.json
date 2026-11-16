@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-11-11T15:04:07.245315+00:00",
+  "passed": true,
+  "exporter_up": true,
+  "prometheus_target_up": true,
+  "prometheus_mongodb_up": 1,
+  "exporter_url": "http://localhost:9216/metrics",
+  "prometheus_url": "http://localhost:9090"
+}

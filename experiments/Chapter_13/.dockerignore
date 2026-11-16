@@ -1,0 +1,10 @@
+.env
+.secrets
+**/.terraform
+**/*.tfstate*
+**/*.tfvars
+**/*tfplan*
+**/__pycache__
+*.zip
+screenshots
+.git

@@ -1,0 +1,98 @@
+name: experiment14
+services:
+  mongo:
+    image: mongo:7.0
+    command:
+    - mongod
+    - --replSet
+    - rs14
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.3'
+    - --oplogSize
+    - '128'
+    volumes:
+    - mongo-data:/data/db
+    mem_limit: 1g
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: &id001
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'
+  mongo-restore:
+    image: mongo:7.0
+    profiles:
+    - restore
+    command:
+    - mongod
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.3'
+    volumes:
+    - restore-data:/data/db
+    mem_limit: 1g
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: *id001
+  runner:
+    image: ${LAB_IMAGE:-experiment14-runner:local}
+    env_file: .env
+    environment: &id002
+      RESULTS_DIR: /results
+      LOGS_DIR: /logs
+      BACKUP_DIR: /backups
+    volumes: &id003
+    - ./results:/results
+    - ./logs:/logs
+    - ./backups:/backups
+    logging: *id001
+    profiles:
+    - tools
+  monitor:
+    image: ${LAB_IMAGE:-experiment14-runner:local}
+    env_file: .env
+    environment: *id002
+    volumes: *id003
+    logging: *id001
+    profiles:
+    - monitor
+    command:
+    - monitor
+    - --samples
+    - '0'
+    - --interval
+    - '30'
+    restart: unless-stopped
+  scheduler:
+    image: ${LAB_IMAGE:-experiment14-runner:local}
+    env_file: .env
+    environment: *id002
+    volumes: *id003
+    logging: *id001
+    profiles:
+    - scheduled
+    command:
+    - schedule
+    restart: unless-stopped
+volumes:
+  mongo-data: null
+  restore-data: null

@@ -1,0 +1,9 @@
+pymongo==4.10.1
+numpy==1.26.4
+fastembed==0.5.1
+faiss-cpu==1.10.0
+transformers==4.48.3
+sentencepiece==0.2.0
+reportlab==4.2.5
+matplotlib==3.9.4
+Pillow==10.4.0

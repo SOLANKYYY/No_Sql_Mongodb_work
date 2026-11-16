@@ -1,0 +1,9 @@
+.env
+.secrets/
+__pycache__/
+*.pyc
+*.zip
+results/*
+!results/README.md
+screenshots/*
+!screenshots/README.md

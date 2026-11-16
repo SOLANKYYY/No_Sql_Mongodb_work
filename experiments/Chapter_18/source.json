@@ -1,0 +1,19 @@
+{
+  "source_name": "Signal Desk / CIRCL and Botvrij public MISP feeds",
+  "collected_at": "2026-11-13T12:32:27.452143+00:00",
+  "record_unit": "MISP indicator attribute",
+  "timestamp_basis": "attribute modification time, not observed attack time",
+  "target_basis": "reported observable, not a victim or attack destination",
+  "origin_attestation": "Fetched original public MISP JSON. Attributes are feed claims, not independently confirmed incidents. No synthetic padding.",
+  "unique_records": 15000,
+  "distinct_events": 5,
+  "feeds": {
+    "circl": "https://www.circl.lu/doc/misp/feed-osint/",
+    "botvrij": "https://www.botvrij.eu/data/feed-osint/"
+  },
+  "events_checked": 20,
+  "errors": [],
+  "export_sha256": "6f45e360306b9075c543f4159a23af20d5044315f37779dff4dda6f8aefef1cb",
+  "selection": "15,000 newest attribute modification timestamps among 20 downloaded source events; not global latest threats.",
+  "available_collected": 19734
+}

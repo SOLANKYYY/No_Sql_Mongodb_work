@@ -1,0 +1,71 @@
+name: experiment15
+services:
+  mongo:
+    image: mongo:7.0
+    command:
+    - mongod
+    - --replSet
+    - rs14
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.3'
+    - --oplogSize
+    - '128'
+    volumes:
+    - mongo-data:/data/db
+    mem_limit: 1g
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: &id001
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'
+  runner:
+    image: ${LAB_IMAGE:-experiment15-runner:local}
+    env_file: .env
+    environment: &id002
+      RESULTS_DIR: /results
+      LOGS_DIR: /logs
+      BACKUP_DIR: /backups
+    volumes: &id003
+    - ./results:/results
+    - ./logs:/logs
+    - ./backups:/backups
+    logging: *id001
+    profiles:
+    - tools
+  api:
+    image: ${LAB_IMAGE:-experiment15-runner:local}
+    env_file: .env
+    environment: *id002
+    volumes: *id003
+    logging: *id001
+    profiles:
+    - api
+    entrypoint:
+    - python
+    - -m
+    - uvicorn
+    - api:app
+    - --app-dir
+    - /kit/scripts
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8000'
+    ports:
+    - 127.0.0.1:8015:8000
+    mem_limit: 512m
+    restart: unless-stopped
+volumes:
+  mongo-data: null

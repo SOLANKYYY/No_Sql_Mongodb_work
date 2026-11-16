@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-11-12T17:02:53.717322+00:00",
+  "method": "full mongodump --oplog + captured post-dump range + mongorestore --oplogReplay --oplogLimit",
+  "scope": "controlled dedicated lab; no concurrent application writers",
+  "good_write_timestamp": "1794502972:2014",
+  "excluded_bad_write_timestamp": "1794502972:2015",
+  "captured_post_dump_entries": 2,
+  "backup_seconds": 0.2648828679998587,
+  "restore_seconds": 1.0613031039997622,
+  "recovery_verified_seconds": 1.0684490799999367,
+  "expected": {
+    "count": 10,
+    "sha256": "b4f79ca1087219d959935644d123897a787e341705fca393f1264289476e4f78"
+  },
+  "restored": {
+    "count": 10,
+    "sha256": "b4f79ca1087219d959935644d123897a787e341705fca393f1264289476e4f78"
+  },
+  "good_write_included": true,
+  "bad_write_excluded": true,
+  "passed": true,
+  "backup_directory": "pitr-20261112T170252354442Z"
+}

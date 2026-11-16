@@ -1,0 +1,8 @@
+.env
+.env.*
+.secrets/
+backups/
+logs/
+**/__pycache__/
+*.pyc
+*.zip

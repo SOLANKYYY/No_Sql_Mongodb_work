@@ -1,0 +1,47 @@
+
+============================================================
+  Lab 6.1 (Try It Yourself): Measure Index Usage with $indexStats
+============================================================
+
+[OK] Connected to MongoDB at mongodb://localhost:27017
+Generating 50,000 products (may take a few seconds)...
+[OK] Inserted 50000 products.
+
+[OK] Created 4 indexes (same design as Lab 6.1).
+
+=== Running workload ===
+  Q1 - Category + sort by price                 executed  30 times
+  Q2 - Price range 100 - 150                    executed  10 times
+  Q3 - Tag lookup 'gaming'                      executed  20 times
+  Q4 - Text search 'wireless keyboard'          executed   5 times
+  Q5 - Category + rating, sort by price desc    executed  40 times
+
+=== $indexStats results ===
+[3m                                     Index usage after workload                                     [0m
++--------------------------------------------------------------------------------------------------+
+|[1m [0m[1mIndex name                  [0m[1m [0m|[1m [0m[1mKey pattern                             [0m[1m [0m|[1m [0m[1mOps[0m[1m [0m|[1m [0m[1mShare of all ops[0m[1m [0m|
+|------------------------------+------------------------------------------+-----+------------------|
+| idx_category_price_rating    | {'category': 1, 'price': 1, 'rating': 1} |  70 |            66.7% |
+|------------------------------+------------------------------------------+-----+------------------|
+| idx_tags                     | {'tags': 1}                              |  20 |            19.0% |
+|------------------------------+------------------------------------------+-----+------------------|
+| idx_price                    | {'price': 1}                             |  10 |             9.5% |
+|------------------------------+------------------------------------------+-----+------------------|
+| idx_name_text                | {'_fts': 'text', '_ftsx': 1}             |   5 |             4.8% |
+|------------------------------+------------------------------------------+-----+------------------|
+| _id_                         | {'_id': 1}                               |   0 |             0.0% |
++--------------------------------------------------------------------------------------------------+
+
+Most frequently used index : idx_category_price_rating (70 ops, 66.7% of all index operations)
+Indexes never used         : _id_
+  (an unused index only costs write throughput and storage - candidate to drop)
+
+[OK] Stored 5 index usage records in nosql_labs.index_stats_results
+[OK] Exported 5 documents from 'index_stats_results' to index_stats_results.json
+[OK] Exported 1000 documents from 'products_tryit' to products_tryit_sample.json
+[OK] Terminal output saved to output.txt
+
+============================================================
+  Lab 6.1 Try It Yourself Complete
+============================================================
+

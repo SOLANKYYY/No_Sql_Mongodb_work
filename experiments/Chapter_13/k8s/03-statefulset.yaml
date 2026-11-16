@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: exercise13
+spec:
+  serviceName: mongo-headless-svc
+  replicas: 3
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      terminationGracePeriodSeconds: 30
+      initContainers:
+      - name: prepare-key
+        image: mongo:7.0
+        command:
+        - bash
+        - -ec
+        - cp /secret/keyfile /key/keyfile; chown 999:999 /key/keyfile; chmod 400 /key/keyfile;
+          chown 999:999 /data/db
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - name: shared-secret
+          mountPath: /secret
+          readOnly: true
+        - name: keyfile
+          mountPath: /key
+        - name: mongo-data
+          mountPath: /data/db
+      containers:
+      - name: mongod
+        image: mongo:7.0
+        command:
+        - mongod
+        - --replSet
+        - rs0
+        - --keyFile
+        - /run/mongo-key/keyfile
+        - --bind_ip_all
+        - --wiredTigerCacheSizeGB
+        - '0.3'
+        securityContext:
+          runAsUser: 999
+          runAsGroup: 999
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 27017
+          name: mongodb
+        envFrom:
+        - secretRef:
+            name: mongo-auth
+        env:
+        - name: RS_HOSTS
+          value: mongo-0.mongo-headless-svc.exercise13.svc.cluster.local:27017,mongo-1.mongo-headless-svc.exercise13.svc.cluster.local:27017,mongo-2.mongo-headless-svc.exercise13.svc.cluster.local:27017
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /data/db
+        - name: keyfile
+          mountPath: /run/mongo-key
+          readOnly: true
+        - name: scripts
+          mountPath: /scripts
+          readOnly: true
+        resources:
+          requests:
+            cpu: 100m
+            memory: 384Mi
+          limits:
+            cpu: '1'
+            memory: 1Gi
+        startupProbe:
+          exec: &id001
+            command:
+            - mongosh
+            - --quiet
+            - --eval
+            - 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)'
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 60
+        readinessProbe:
+          exec: *id001
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+        livenessProbe:
+          exec: *id001
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 12
+      volumes:
+      - name: shared-secret
+        secret:
+          secretName: mongo-keyfile
+      - name: keyfile
+        emptyDir:
+          medium: Memory
+      - name: scripts
+        configMap:
+          name: mongo-scripts
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi

@@ -1,0 +1,8 @@
+.env
+.secrets/
+__pycache__/
+terraform/.terraform/
+terraform/*.tfstate*
+terraform/*.tfvars
+terraform/*tfplan*
+screenshots/

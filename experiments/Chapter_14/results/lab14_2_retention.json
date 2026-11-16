@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-11-12T17:03:09.893176+00:00",
+  "evidence_type": "temporary fixture folders using the real cleanup function",
+  "days": 7,
+  "checks": {
+    "old_completed_removed": true,
+    "recent_kept": true,
+    "boundary_kept": true,
+    "incomplete_kept": true,
+    "unrelated_kept": true
+  },
+  "passed": true
+}

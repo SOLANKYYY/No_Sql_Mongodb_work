@@ -1,0 +1,25 @@
+LAB 10.1 - BANK TRANSFER
+Recorded: 2026-10-14T14:58:42.706501+00:00
+Money uses integer paise; total must remain 150000 paise.
+
+Successful transfer: COMMITTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 100000, 'version': 0}, {'account_id': 'ACC-002', 'balance': 50000, 'version': 0}], 'historyCount': 0}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+
+Insufficient funds: ABORTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  InsufficientFunds: Source account missing or insufficient funds
+
+Failure after debit before credit: ABORTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  InjectedFailure: Intentional failure after debit and before credit
+
+Real write conflict with retry: COMMITTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 65000, 'version': 3}, {'account_id': 'ACC-002', 'balance': 85000, 'version': 2}], 'historyCount': 2}
+  Retry: {'kind': 'transaction-retry', 'attempt': 1, 'delaySeconds': 0.1, 'code': 112, 'label': 'TransientTransactionError'}
+Duplicate transfer ID leaves balances/history unchanged: {'alreadyCommitted': True, 'unchanged': True}
+Total final balance: 150000
+

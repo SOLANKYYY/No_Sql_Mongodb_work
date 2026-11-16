@@ -1,0 +1,11 @@
+exercise13: digest: sha256:0dcbc96855bde9b632b84363d6303f4b60200f60095b275041a536458e1d6b2d size: 856
+exercise13: Pulling from solankyyy/mongodb-exercise13
+Digest: sha256:0dcbc96855bde9b632b84363d6303f4b60200f60095b275041a536458e1d6b2d
+Status: Image is up to date for solankyyy/mongodb-exercise13:exercise13
+docker.io/solankyyy/mongodb-exercise13:exercise13
+Report saved: /results/Exercise_13_Final_Report.pdf
+PUBLISHED: solankyyy/mongodb-exercise13:exercise13
+DOCKER URL: https://hub.docker.com/r/solankyyy/mongodb-exercise13
+Open the Docker Hub page, ensure the repository is Public, and capture the exercise13 tag(SCREENSHOT 06).
+Submit results/Exercise_13_Final_Report.pdf to Classroom. Retain the image for demonstration.
+PS C:\Users\omnso\Downloads\Exercise_13_Submission\Exercise_13_Submission> 

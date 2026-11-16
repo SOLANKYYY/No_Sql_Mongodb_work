@@ -1,0 +1,11 @@
+﻿{
+    "experiments":  {
+                        "14":  {
+                                   "verified_pull":  true,
+                                   "timestamp":  "Verified in supplied push/pull log, 12 November 2026",
+                                   "docker_url":  "https://hub.docker.com/r/solankyyy/nosql-exercise14",
+                                   "digest":  "solankyyy/nosql-exercise14@sha256:28afd7004ef7570b813a33afba140aacaf5b9abc170bf62bba73f3536bdd5b66",
+                                   "image":  "solankyyy/nosql-exercise14:exercise14"
+                               }
+                    }
+}

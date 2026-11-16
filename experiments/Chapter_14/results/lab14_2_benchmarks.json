@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-11-12T17:03:09.592420+00:00",
+  "passed": true,
+  "rows": [
+    {
+      "documents": 1000,
+      "logical_bson_bytes": 984000,
+      "compressed_backup_bytes": 55985,
+      "backup_seconds": 0.11306161599986808,
+      "restore_seconds": 0.09818598500032749,
+      "recovery_verified_seconds": 0.12181322700007513,
+      "rpo_schedule_seconds": 3600,
+      "before": {
+        "count": 1000,
+        "sha256": "7d317409ad42c2d2db125f3c24fe96f70aa55860cd7eecdded424c9b71d555f4"
+      },
+      "after": {
+        "count": 1000,
+        "sha256": "7d317409ad42c2d2db125f3c24fe96f70aa55860cd7eecdded424c9b71d555f4"
+      },
+      "passed": true
+    },
+    {
+      "documents": 10000,
+      "logical_bson_bytes": 9840000,
+      "compressed_backup_bytes": 554831,
+      "backup_seconds": 0.8369877170002837,
+      "restore_seconds": 0.2659653230002732,
+      "recovery_verified_seconds": 0.42173865899985685,
+      "rpo_schedule_seconds": 3600,
+      "before": {
+        "count": 10000,
+        "sha256": "de48314acebc47ff08e69506ae54402dfb371e77f66c7974f3e7c6f0a1a93baf"
+      },
+      "after": {
+        "count": 10000,
+        "sha256": "de48314acebc47ff08e69506ae54402dfb371e77f66c7974f3e7c6f0a1a93baf"
+      },
+      "passed": true
+    },
+    {
+      "documents": 100000,
+      "logical_bson_bytes": 98400000,
+      "compressed_backup_bytes": 5543568,
+      "backup_seconds": 6.966793182999936,
+      "restore_seconds": 2.0273421719998623,
+      "recovery_verified_seconds": 3.3898576719998346,
+      "rpo_schedule_seconds": 3600,
+      "before": {
+        "count": 100000,
+        "sha256": "dfad77bf2a375cae34992de70724de0764f2acd3f40660129c03a5bf3f214d96"
+      },
+      "after": {
+        "count": 100000,
+        "sha256": "dfad77bf2a375cae34992de70724de0764f2acd3f40660129c03a5bf3f214d96"
+      },
+      "passed": true
+    }
+  ],
+  "rpo_note": "Hourly successful snapshots imply nominal exposure of up to one hour; completion time, scheduling delays and failures can increase it.",
+  "rto_note": "Restore seconds and restore-plus-integrity/read-readiness seconds are measured. No full application restart or infrastructure replacement is included."
+}

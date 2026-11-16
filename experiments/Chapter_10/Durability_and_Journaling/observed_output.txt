@@ -1,0 +1,12 @@
+DURABILITY / JOURNALING
+Recorded: 2026-10-14T14:59:04.115435+00:00
+Commit write concern: majority + j:true
+All three process IDs changed: True
+Restart method: SIGKILL all three isolated lab containers; restart with original volumes
+  ex10-mongo1:27017 both committed documents present: True
+  ex10-mongo2:27017 both committed documents present: True
+  ex10-mongo3:27017 both committed documents present: True
+Unclean process/container restart, not a power-loss or storage-corruption test
+
+Verification: bank=True inventory=True durability=True
+Scarcity expected five reserved / three out of stock observed: True

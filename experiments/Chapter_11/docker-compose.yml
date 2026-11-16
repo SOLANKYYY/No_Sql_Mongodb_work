@@ -1,0 +1,123 @@
+name: experiment11
+services:
+  runner:
+    image: ${LAB_IMAGE:-experiment11-runner:local}
+    volumes:
+    - ./results:/results
+    - ./screenshots:/screenshots:ro
+    environment:
+      RESULTS_DIR: /results
+    logging: &id001
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'
+  config:
+    image: mongo:7.0.16
+    command:
+    - mongod
+    - --configsvr
+    - --replSet
+    - cfg
+    - --port
+    - '27017'
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.25'
+    - --dbpath
+    - /data/db
+    volumes:
+    - config-data:/data/db
+    mem_limit: 750m
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - db.adminCommand({ping:1})
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: *id001
+  shard1:
+    image: mongo:7.0.16
+    command:
+    - mongod
+    - --shardsvr
+    - --replSet
+    - shardA
+    - --port
+    - '27017'
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.25'
+    - --dbpath
+    - /data/db
+    volumes:
+    - shard1-data:/data/db
+    mem_limit: 750m
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - db.adminCommand({ping:1})
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: *id001
+  shard2:
+    image: mongo:7.0.16
+    command:
+    - mongod
+    - --shardsvr
+    - --replSet
+    - shardB
+    - --port
+    - '27017'
+    - --bind_ip_all
+    - --wiredTigerCacheSizeGB
+    - '0.25'
+    - --dbpath
+    - /data/db
+    volumes:
+    - shard2-data:/data/db
+    mem_limit: 750m
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - db.adminCommand({ping:1})
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: *id001
+  mongos:
+    image: mongo:7.0.16
+    command:
+    - mongos
+    - --configdb
+    - cfg/config:27017
+    - --port
+    - '27017'
+    - --bind_ip_all
+    mem_limit: 512m
+    healthcheck:
+      test:
+      - CMD
+      - mongosh
+      - --quiet
+      - --eval
+      - db.adminCommand({ping:1})
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    logging: *id001
+volumes:
+  config-data: null
+  shard1-data: null
+  shard2-data: null

@@ -1,0 +1,7 @@
+{
+  "image": "solankyyy/mongodb-exercise13:exercise13",
+  "docker_url": "https://hub.docker.com/r/solankyyy/mongodb-exercise13",
+  "digest": "solankyyy/mongodb-exercise13@sha256:0dcbc96855bde9b632b84363d6303f4b60200f60095b275041a536458e1d6b2d",
+  "verified_pull": true,
+  "timestamp": "2026-11-11T15:28:49.2515013Z"
+}

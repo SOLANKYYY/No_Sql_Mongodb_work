@@ -1,0 +1,11 @@
+﻿{
+    "experiments":  {
+                        "16":  {
+                                   "verified_pull":  true,
+                                   "timestamp":  "2026-11-12T18:21:07.5986203Z",
+                                   "docker_url":  "https://hub.docker.com/r/solankyyy/nosql-exercise16",
+                                   "digest":  "solankyyy/nosql-exercise16@sha256:b585e9a41823e422ad7713594080e477681589becb94ee7e7cf788aaf98a68ff",
+                                   "image":  "solankyyy/nosql-exercise16:exercise16"
+                               }
+                    }
+}

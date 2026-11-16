@@ -1,0 +1,104 @@
+{
+  "format": "exercise10-transactions",
+  "version": 1,
+  "activity": "durability",
+  "runId": "b82e8214b2e64f8e888a8edb477a845e",
+  "startedAt": "2026-10-14T14:59:04.115435+00:00",
+  "mongoVersion": "7.0.43",
+  "members": [
+    {
+      "name": "ex10-mongo1:27017",
+      "state": "PRIMARY",
+      "health": 1.0
+    },
+    {
+      "name": "ex10-mongo2:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    },
+    {
+      "name": "ex10-mongo3:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    }
+  ],
+  "readConcern": "snapshot",
+  "writeConcern": {
+    "w": "majority",
+    "j": true
+  },
+  "source": "live MongoDB lab run",
+  "database": "ex10_lab_durability_b82e8214b2e64f8e888a8edb477a845e",
+  "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+  "preparedAt": "2026-10-14T14:59:04.301364+00:00",
+  "beforeProcessIds": {
+    "ex10-mongo1:27017": "6acf98910e2500ee25652280",
+    "ex10-mongo2:27017": "6acf9891e5d680aa8e861f15",
+    "ex10-mongo3:27017": "6acf9891179cc71580af0146"
+  },
+  "restartMethod": "SIGKILL all three isolated lab containers; restart with original volumes",
+  "limitation": "Unclean process/container restart, not a power-loss or storage-corruption test",
+  "afterMembers": [
+    {
+      "name": "ex10-mongo1:27017",
+      "state": "PRIMARY",
+      "health": 1.0
+    },
+    {
+      "name": "ex10-mongo2:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    },
+    {
+      "name": "ex10-mongo3:27017",
+      "state": "SECONDARY",
+      "health": 1.0
+    }
+  ],
+  "afterProcessIds": {
+    "ex10-mongo1:27017": "6acf98baf0725cef59cfae41",
+    "ex10-mongo2:27017": "6acf98bafa423dee63298862",
+    "ex10-mongo3:27017": "6acf98ba336ba5595378fe4e"
+  },
+  "allProcessesRestarted": true,
+  "observations": [
+    {
+      "host": "ex10-mongo1:27017",
+      "ledger": {
+        "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+        "amount": 12345
+      },
+      "audit": {
+        "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+        "action": "durable-commit"
+      },
+      "present": true
+    },
+    {
+      "host": "ex10-mongo2:27017",
+      "ledger": {
+        "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+        "amount": 12345
+      },
+      "audit": {
+        "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+        "action": "durable-commit"
+      },
+      "present": true
+    },
+    {
+      "host": "ex10-mongo3:27017",
+      "ledger": {
+        "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+        "amount": 12345
+      },
+      "audit": {
+        "marker": "ee2f310666d64aa2aa0ead1c0d6b9cb0",
+        "action": "durable-commit"
+      },
+      "present": true
+    }
+  ],
+  "verified": true,
+  "finishedAt": "2026-10-14T14:59:19.845784+00:00"
+}

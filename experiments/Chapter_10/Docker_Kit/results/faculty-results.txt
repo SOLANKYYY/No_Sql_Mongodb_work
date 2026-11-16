@@ -1,0 +1,84 @@
+EXERCISE 10 - TRANSACTIONS, ATOMICITY, DURABILITY & JOURNALING
+Measured evidence (timestamps identify each actual run).
+
+LAB 10.1 - BANK TRANSFER
+Recorded: 2026-10-14T14:58:42.706501+00:00
+Money uses integer paise; total must remain 150000 paise.
+
+Successful transfer: COMMITTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 100000, 'version': 0}, {'account_id': 'ACC-002', 'balance': 50000, 'version': 0}], 'historyCount': 0}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+
+Insufficient funds: ABORTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  InsufficientFunds: Source account missing or insufficient funds
+
+Failure after debit before credit: ABORTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  InjectedFailure: Intentional failure after debit and before credit
+
+Real write conflict with retry: COMMITTED | verified=True
+  BEFORE: {'accounts': [{'account_id': 'ACC-001', 'balance': 75000, 'version': 1}, {'account_id': 'ACC-002', 'balance': 75000, 'version': 1}], 'historyCount': 1}
+  AFTER:  {'accounts': [{'account_id': 'ACC-001', 'balance': 65000, 'version': 3}, {'account_id': 'ACC-002', 'balance': 85000, 'version': 2}], 'historyCount': 2}
+  Retry: {'kind': 'transaction-retry', 'attempt': 1, 'delaySeconds': 0.1, 'code': 112, 'label': 'TransientTransactionError'}
+Duplicate transfer ID leaves balances/history unchanged: {'alreadyCommitted': True, 'unchanged': True}
+Total final balance: 150000
+
+LAB 10.2 - INVENTORY
+Recorded: 2026-10-14T14:58:44.153473+00:00
+
+8 shoppers / 5 units | max retries=0
+  Request 0: database_error | retries=0
+  Request 1: database_error | retries=0
+  Request 2: database_error | retries=0
+  Request 3: database_error | retries=0
+  Request 4: database_error | retries=0
+  Request 5: reserved | retries=0
+  Request 6: database_error | retries=0
+  Request 7: database_error | retries=0
+  Counts: {'reserved': 1, 'out_of_stock': 0, 'retry_exhausted': 0, 'database_error': 7, 'unknown_commit': 0, 'error': 0}
+  Final stock/orders/version: {'stock': 4, 'version': 1, 'orders': 1}
+  Inventory/order invariant: True
+
+8 shoppers / 5 units | max retries=5
+  Request 0: out_of_stock | retries=3
+  Request 1: reserved | retries=1
+  Request 2: out_of_stock | retries=3
+  Request 3: reserved | retries=1
+  Request 4: out_of_stock | retries=3
+  Request 5: reserved | retries=2
+  Request 6: reserved | retries=0
+  Request 7: reserved | retries=2
+  Counts: {'reserved': 5, 'out_of_stock': 3, 'retry_exhausted': 0, 'database_error': 0, 'unknown_commit': 0, 'error': 0}
+  Final stock/orders/version: {'stock': 0, 'version': 5, 'orders': 5}
+  Inventory/order invariant: True
+
+ORDER CREATION FAILURE AFTER STOCK DECREMENT
+  transaction: before={'stock': 5, 'version': 0, 'orders': 0} after={'stock': 5, 'version': 0, 'orders': 0} unchanged=True
+  nontransaction: before={'stock': 5, 'version': 0, 'orders': 0} after={'stock': 4, 'version': 1, 'orders': 0} unchanged=False
+
+THROUGHPUT - 64 requests x 3 trials per configuration
+Threads Mode              Median /s     Min /s     Max /s   Success/req  Retries
+      1 transaction          160.17     153.10     167.91       192/192        0
+      1 nontransaction       101.61      95.62     105.10       192/192        0
+      4 transaction          138.97      40.93     166.75       192/192       24
+      4 nontransaction       198.11     193.66     209.38       192/192        0
+      8 transaction           40.53      20.09      84.38       192/192       63
+      8 nontransaction       310.91     305.86     339.86       192/192        0
+     16 transaction           40.00      39.79      40.46       192/192      126
+     16 nontransaction       531.52     525.40     568.18       192/192        0
+
+DURABILITY / JOURNALING
+Recorded: 2026-10-14T14:59:04.115435+00:00
+Commit write concern: majority + j:true
+All three process IDs changed: True
+Restart method: SIGKILL all three isolated lab containers; restart with original volumes
+  ex10-mongo1:27017 both committed documents present: True
+  ex10-mongo2:27017 both committed documents present: True
+  ex10-mongo3:27017 both committed documents present: True
+Unclean process/container restart, not a power-loss or storage-corruption test
+
+Verification: bank=True inventory=True durability=True
+Scarcity expected five reserved / three out of stock observed: True

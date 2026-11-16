@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-11-12T17:03:11.013100+00:00",
+  "configured_interval_seconds": 3600,
+  "retention_days": 7,
+  "status": "completed",
+  "last_success_at": "2026-11-12T17:03:11.365088+00:00",
+  "last_backup": "backup-20261112T170311029394Z",
+  "backup_seconds": 0.17678773099987666,
+  "removed": [],
+  "cycle_seconds": 0.35201677600025505,
+  "next_due_in_seconds": 3599.6479814209997
+}

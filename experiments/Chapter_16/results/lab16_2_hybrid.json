@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-11-12T18:18:34.416431+00:00",
+  "passed": true,
+  "checks": {
+    "all_live_backends_succeeded": true,
+    "transaction_lookup": true,
+    "time_ordered_profile": true,
+    "connected_accounts": true,
+    "directed_cycle_found": true
+  },
+  "analysis": {
+    "transaction_id": "TX-001",
+    "user_id": "U1",
+    "backends": {
+      "mongodb": {
+        "status": "ok",
+        "data": {
+          "txn_id": "TX-001",
+          "user_id": "U1",
+          "amount": 50000.0,
+          "merchant": "Example Store",
+          "timestamp": "2026-11-12 18:18:33.154000+00:00",
+          "risk_score": 0.92
+        },
+        "milliseconds": 1.5025210004750988
+      },
+      "cassandra": {
+        "status": "ok",
+        "data": [
+          {
+            "user_id": "U1",
+            "event_time": "2026-11-12 18:18:33.154000",
+            "event_id": "TX-001",
+            "txn_id": "TX-001",
+            "amount": 50000.0,
+            "merchant": "Example Store"
+          },
+          {
+            "user_id": "U1",
+            "event_time": "2026-11-12 17:18:33.154000",
+            "event_id": "TX-002",
+            "txn_id": "TX-002",
+            "amount": 250.0,
+            "merchant": "Books"
+          }
+        ],
+        "milliseconds": 2.633936000165704
+      },
+      "neo4j": {
+        "status": "ok",
+        "data": {
+          "connected_accounts": [
+            {
+              "id": "U2",
+              "hops": 1
+            },
+            {
+              "id": "U3",
+              "hops": 1
+            },
+            {
+              "id": "U4",
+              "hops": 2
+            }
+          ],
+          "directed_cycles": [
+            [
+              "U1",
+              "U2",
+              "U3",
+              "U1"
+            ]
+          ],
+          "interpretation": "Connectivity and cycles are investigation signals, not proof of fraud."
+        },
+        "milliseconds": 244.9011270000483
+      }
+    },
+    "complete": true
+  },
+  "latencies": {
+    "transaction": {
+      "samples": 20,
+      "median_ms": 0.4315010000937036,
+      "mean_ms": 0.4379874498681602,
+      "min_ms": 0.3724349999174592,
+      "max_ms": 0.5502700005308725
+    },
+    "profile": {
+      "samples": 20,
+      "median_ms": 1.3169445001040003,
+      "mean_ms": 1.4124192498911725,
+      "min_ms": 1.1305899997751112,
+      "max_ms": 1.9985159997304436
+    },
+    "graph_1_hops": {
+      "samples": 20,
+      "median_ms": 7.022285999937594,
+      "mean_ms": 7.569346800164567,
+      "min_ms": 5.262272999971174,
+      "max_ms": 17.14697100032936
+    },
+    "graph_2_hops": {
+      "samples": 20,
+      "median_ms": 5.209452000144665,
+      "mean_ms": 5.632096349972926,
+      "min_ms": 3.7355110007410985,
+      "max_ms": 16.427237000243622
+    },
+    "graph_3_hops": {
+      "samples": 20,
+      "median_ms": 5.272628000057011,
+      "mean_ms": 5.659586150068208,
+      "min_ms": 4.146420000324724,
+      "max_ms": 13.201837000451633
+    }
+  },
+  "performance_scope": "20 warm repetitions on a tiny local dataset; observations are not production latency guarantees."
+}
