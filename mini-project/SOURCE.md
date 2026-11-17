@@ -1,5 +1,11 @@
-Signal Desk source snapshot from https://github.com/SOLANKYYY/signal-desk at commit 3a4681d074030a622899e186ec787105a0ae678a.
+# Signal Desk - Mini Project
 
-The local SLM RAG experiment and recorded answers are in ../../experiments/Chapter_17/. The browser application and local experiment have distinct model configurations; local results do not prove current hosted provider availability.
+**Main repository:** https://github.com/SOLANKYYY/signal-desk
 
-Windows filename compatibility: the upstream repository contains both .github/PULL_REQUEST_TEMPLATE.md and .github/pull_request_template.md. The uppercase variant is preserved here as PULL_REQUEST_TEMPLATE_LEGACY.md so both versions remain available on case-insensitive filesystems.
+**Live application:** https://signal-desk-xi-seven.vercel.app/
+
+**Report:** [Signal Desk Mini Project Report](../reports/Signal_Desk_Mini_Project_Report.pdf)
+
+The mini project is Signal Desk itself: evidence-grounded chat, threat explorer, shared indicators, file/message checks and investigation notebook. The application source, deployment configuration and setup instructions belong in the main Signal Desk repository. The hosted application requires the owner's login.
+
+The duplicate standalone mini-project source snapshot has been removed from this submission. Chapter-specific laboratory material remains with its experiments.

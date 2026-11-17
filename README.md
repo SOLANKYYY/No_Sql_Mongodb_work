@@ -18,7 +18,7 @@ Print the two PDFs separately for submission.
 | Folder/file | What it contains and why |
 |---|---|
 | experiments/Chapter_01 to Chapter_18 | Each experiment keeps its code, datasets, original reports and evidence together, preserving relative paths. |
-| mini-project/signal-desk | A source snapshot of the MongoDB-backed chat and threat-intelligence application. |
+| mini-project/SOURCE.md | Links to the separately maintained Signal Desk repository and live application; no duplicate mini-project source is stored here. |
 | reports | The two revised consolidated PDFs. |
 | DOCKER_HUB_LINKS.md | Docker links and their publication evidence status. The same information is also in the lab PDF. |
 | FILE_MANIFEST.json | File origins and checksums for the organised submission. |
@@ -53,6 +53,6 @@ Use the README, requirements and setup scripts inside the selected chapter. Conf
 
 Chapters 11 and 12 are included in the same numbered structure. Their original root folders remain on GitHub to preserve existing links. Chapter 15 duplicate nested ZIP content was deduplicated. Source code availability does not imply that every live test has been completed.
 
-The current Signal Desk source supports provider-configurable chat. Chapter 17 supplies a separate local SLM demonstration with recorded answers, including weak outputs; those measurements do not certify the hosted chatbot.
+The mini project is Signal Desk, maintained at https://github.com/SOLANKYYY/signal-desk and hosted at https://signal-desk-xi-seven.vercel.app/. Its separate report describes that application and its features. Chapter 17 remains a standalone laboratory experiment; its results are not mini-project results.
 
 Repository: https://github.com/SOLANKYYY/No_Sql_Mongodb_work
