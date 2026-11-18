@@ -1,4 +1,20 @@
-# Experiment 16 - standalone submission
+# Experiment 16 · Polyglot persistence and a hybrid query service
+
+Represent enrolments in MongoDB, Cassandra and Neo4j, then combine a transaction record, event history and account relationships in one query.
+
+## Findings and evidence
+
+All three stores returned C1 and C2 for student S1. For transaction TX-001, the hybrid query retrieved the transaction, time-ordered events and a three-account cycle for review.
+
+- [Cassandra and Neo4j schemas](schemas/)
+- [Enrolment comparisons](results/lab16_1_models.json)
+- [Cross-store query results](results/lab16_2_hybrid.json)
+- [Chapter report](results/Exercise_16_Final_Report.pdf)
+
+[All 18 experiments](../README.md)
+
+---
+
 Solanki Om Narendra | 24BTRCL190
 
 This folder is independent. It has its own code, Docker Compose project (experiment16), volumes, results, report and Docker Hub repository. No other experiment's results are required.

@@ -1,4 +1,18 @@
-# Exercise 13 - Deploying MongoDB with Containers and the Cloud
+# Experiment 13 · Replica-set deployment with Compose and Kubernetes
+
+Deploy a monitored replica set, observe a primary change, and check whether data survives Kubernetes pod replacement.
+
+## Findings and evidence
+
+The saved run observed the primary move from mongo1 to mongo2 and preserved acknowledged documents. On Kubernetes, the replacement pod had a new UID and reused the existing persistent volumes.
+
+- [Election record](results/lab13_1_failover.json)
+- [Pod and volume identifiers](results/lab13_2_kubernetes.json)
+- [Chapter report](Exercise_13_Final_Report.pdf)
+
+[All 18 experiments](../README.md)
+
+---
 
 Separate coursework project. This does not modify Signal Desk or its website.
 Prepared against the instructor's Chapter 13 repository and both assignment screenshots.

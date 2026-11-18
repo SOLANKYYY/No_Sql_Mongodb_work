@@ -1,4 +1,18 @@
-# Signal Desk
+# Experiment 07 · Working sets and WiredTiger cache
+
+Use Signal Desk report data to compare embedded and referenced sources, then measure cache behaviour under randomized reads.
+
+## Findings and evidence
+
+The preparation run seeded 465 annual-report references and five fictional scenarios. Three passes each read 100,000 synthetic documents of 2,048 BSON bytes. The run used memory-backed storage, which limits conclusions about disk performance.
+
+- [Schema and workload implementation](backend/labs.py)
+- [Validation conditions](validation-results/VALIDATION.md)
+- [Recorded read passes](validation-results/workload_random_reads.json)
+
+[All 18 experiments](../README.md)
+
+---
 
 A Cyber Threat Intelligence workspace for report investigation, PDF evidence, analyst review, schema analysis, and cache measurement. It includes a browser frontend, Python API, MongoDB, real BSON dump, repeatable lab commands, and written answers.
 

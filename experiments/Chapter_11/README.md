@@ -1,4 +1,18 @@
-# Experiment 11 - separate submission kit
+# Experiment 11 · Sharding and shard-key selection
+
+Compare timestamp range sharding with hashed user IDs and use query plans to see how many shards receive each query.
+
+## Findings and evidence
+
+The Docker lab defines two collections of 10,000 synthetic documents each and a separate customer-skew exercise. The validation notes record seven passing preparation tests. The repository contains a lab guide and test code, with live shard-distribution measurements pending.
+
+- [Shard setup, distribution and routing checks](scripts/lab.py)
+- [Validation status](docs/VALIDATION.md)
+- [Lab guide](docs/Exercise_11_Lab_Guide.pdf)
+
+[All 18 experiments](../README.md)
+
+---
 
 Solanki Om Narendra | 24BTRCL190 | 5AIMLB
 23CSE528: NoSQL Database using MongoDB

@@ -1,4 +1,18 @@
-# Experiment 12 - separate submission kit
+# Experiment 12 · MongoDB access control and TLS
+
+Define roles for order readers, writers and HR readers, limit access to employee fields through a view, and check authenticated TLS connections.
+
+## Findings and evidence
+
+The kit defines tests for permitted operations, denied reads and writes, and certificate verification. Its validation notes record eight passing preparation tests. Live role and TLS results are pending.
+
+- [Role and connection checks](scripts/lab.py)
+- [Validation status](docs/VALIDATION.md)
+- [Lab guide](docs/Exercise_12_Lab_Guide.pdf)
+
+[All 18 experiments](../README.md)
+
+---
 
 Solanki Om Narendra | 24BTRCL190 | 5AIMLB
 23CSE528: NoSQL Database using MongoDB

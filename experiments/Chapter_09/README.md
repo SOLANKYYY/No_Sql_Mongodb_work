@@ -1,4 +1,24 @@
-# Exercise 9 — implementation source code
+# Experiment 09 · Write concern, journaling and partitions
+
+Compare the time required to acknowledge writes, then observe which writes can be acknowledged when replica-set members lose contact.
+
+## Findings and evidence
+
+The benchmark specifies 1,000 inserts for each of six write-concern and journal settings. The partition exercise disconnects one secondary and then both, and checks recovery on all three members. This folder contains the implementation. Its original README places the measured outputs in a separate submission archive.
+
+- [Benchmark protocol](Docker_Kit/README.md)
+- [Measurement implementation](Docker_Kit/lab9.py)
+- [Partition and recovery procedure](Docker_Kit/run-partition.ps1)
+
+## Activities
+
+- [Activity_9.1](Activity_9.1/README.md)
+- [Activity_9.1_Try_It_Yourself](Activity_9.1_Try_It_Yourself/README.md)
+- [Activity_9.2](Activity_9.2/README.md)
+
+[All 18 experiments](../README.md)
+
+---
 
 This is the separate code package for Signal Desk Exercise 9. It contains the complete application source and the Docker experiments. The report, recorded measurements and submission evidence are in the separate Chapter_09_Submission.zip.
 

@@ -1,4 +1,25 @@
-# Chapter 02 - Cloud Computing Primer and Environment Setup
+# Experiment 02 · Environment setup and bookstore CRUD
+
+Check local Docker and Atlas connections, then create, read, update and delete documents in a bookstore collection.
+
+## Findings and evidence
+
+The comparison recorded MongoDB 7.0.40 locally and 8.0.29 on Atlas. In the price exercise, the update matched and changed all four books published before 2010 in an eight-title dataset.
+
+- [Server comparison](Activity_2.1_Try_It_Yourself/activity_2_1_server_comparison.json)
+- [Book prices before and after](Activity_2.2_Try_It_Yourself/activity_2_2_try_it_yourself_books.json)
+- [Chapter report](Chapter02_Activities_Report.docx)
+
+## Activities
+
+- [2.1 Environment checks](Activity_2.1/README.md)
+- [2.1 extension · Docker and Atlas](Activity_2.1_Try_It_Yourself/README.md)
+- [2.2 Bookstore CRUD](Activity_2.2/README.md)
+- [2.2 extension · Updating prices by year](Activity_2.2_Try_It_Yourself/README.md)
+
+[All 18 experiments](../README.md)
+
+---
 
 Activities 2.1 and 2.2 from *NoSQL Databases using MongoDB*, including both
 "Try It Yourself" exercises.

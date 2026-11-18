@@ -1,4 +1,26 @@
-# Chapter 10 - Final Submission
+# Experiment 10 · Transactions, retries and durability
+
+Use bank transfers and stock reservations to test rollback, retries and the consistency of related writes.
+
+## Findings and evidence
+
+The recorded transfer tests preserved 150,000 paise. Eight shoppers competed for five units and five reservations succeeded. An injected failure restored stock and removed the pending order in the transactional case, while the nontransactional comparison left one unit deducted.
+
+- [Measured outcomes](RESULTS_EXPLANATION.md)
+- [Bank checks](Evidence/lab_10_1_bank.json)
+- [Throughput comparison](Evidence/throughput.png)
+- [Chapter report](Chapter_10_Lab_Report.pdf)
+
+## Activities
+
+- [Activity_10.1](Activity_10.1/README.md)
+- [Activity_10.1_Try_It_Yourself](Activity_10.1_Try_It_Yourself/README.md)
+- [Activity_10.2](Activity_10.2/README.md)
+- [Durability and Journaling](Durability_and_Journaling/README.md)
+
+[All 18 experiments](../README.md)
+
+---
 
 Transactions, Atomicity, Durability & Journaling. Standalone Exercise 10 project.
 

@@ -1,4 +1,19 @@
-# Experiment 17: AI-Native MongoDB: Vector Search and RAG
+# Experiment 17 · Vector search and retrieval-augmented answers
+
+Retrieve passages for a question-answering application and measure how vector-search settings affect latency and recall.
+
+## Findings and evidence
+
+The local RAG run indexed 10 chunks from five documents. A separate benchmark used 5,000 generated sentences and 100 queries. On MongoDB Atlas Local, 400 candidates gave recall@20 of 1.00 against exact search in that run.
+
+- [RAG source documents](data/documents.json)
+- [Benchmark design](docs/METHODOLOGY.md)
+- [Answers and measurements](results/evidence.json)
+- [Latency and recall plot](results/latency_recall.png)
+
+[All 18 experiments](../README.md)
+
+---
 
 Student: Solanki Om Narendra | Roll: 24BTRCL190
 

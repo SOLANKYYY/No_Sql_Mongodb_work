@@ -1,4 +1,19 @@
-# Experiment 18: Comparative Threat Intelligence Capstone
+# Experiment 18 · Cross-database analysis of threat-intelligence feeds
+
+Compare source history, shared observables and daily counts across MongoDB, Cassandra and Neo4j using the same indicator export.
+
+## Findings and evidence
+
+All three databases agreed on the three read queries. The run used 15,000 MISP indicator attributes from five events against an assignment target of 100,000 records. Daily counts describe feed modifications. The graph rule found no qualifying community in this sample.
+
+- [Dataset provenance](source.json)
+- [Scope and query definitions](docs/METHODOLOGY.md)
+- [Cross-database comparisons](results/evidence.json)
+- [Chapter report](results/Exercise_18_Final_Report.pdf)
+
+[All 18 experiments](../README.md)
+
+---
 
 Student: Solanki Om Narendra | Roll: 24BTRCL190
 

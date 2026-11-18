@@ -1,4 +1,20 @@
-# Experiment 14 - standalone submission
+# Experiment 14 · Monitoring, backup and recovery
+
+Sample database health, exercise the alert webhook, and verify backups by restoring and comparing document checksums.
+
+## Findings and evidence
+
+A 1,000-document restore reproduced the original SHA-256 checksum after the collection had been modified. The point-in-time restore included the intended write and excluded the next write. The webhook check used synthetic threshold values and a local HTTP receiver.
+
+- [Alert delivery check](results/lab14_1_webhook.json)
+- [Restore counts and hashes](results/lab14_2_restore.json)
+- [Point-in-time check](results/lab14_2_pitr.json)
+- [Chapter report](results/Exercise_14_Final_Report.pdf)
+
+[All 18 experiments](../README.md)
+
+---
+
 Solanki Om Narendra | 24BTRCL190
 
 This folder is independent. It has its own code, Docker Compose project (experiment14), volumes, results, report and Docker Hub repository. No other experiment's results are required.

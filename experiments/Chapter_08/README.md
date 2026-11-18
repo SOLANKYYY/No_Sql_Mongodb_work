@@ -1,4 +1,25 @@
-# Chapter 8 in Signal Desk
+# Experiment 08 · Replica sets and automatic failover
+
+Follow one write across a three-member replica set, add an arbiter, then observe primary elections and client reads during step-down.
+
+## Findings and evidence
+
+Four Docker activities capture member roles, replication and elections. The chapter contains the scripts and Compose configurations. Each script writes a JSON transcript when run, so an election time or winner must come from that run.
+
+- [Replication check](Activity_8.1/lab_8_1_replica_set.py)
+- [Failover observer](Activity_8.2/lab_8_2_failover_monitor.py)
+- [Priority experiment](Activity_8.2_Try_It_Yourself/try_8_2_priority_election.py)
+
+## Activities
+
+- [8.1 Replica-set deployment](Activity_8.1/README.md)
+- [8.1 extension · Adding an arbiter](Activity_8.1_Try_It_Yourself/README.md)
+- [8.2 Observing failover](Activity_8.2/README.md)
+- [8.2 extension · Election priorities](Activity_8.2_Try_It_Yourself/README.md)
+
+[All 18 experiments](../README.md)
+
+---
 
 Signal Desk → **Replica Set Lab** displays the results of the four Docker experiments. It shows the roles and health recorded at the end of a run, replication checks, primary changes, read successes/failures, election predictions, and expandable command evidence.
 
